@@ -89,9 +89,9 @@ const next =
 
 <style is:global>
   .chapter-head {
-    border-bottom: 2px solid var(--c-accent);
+    border-bottom: 1px solid var(--border);
     padding-bottom: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.8rem;
     display: flex;
     align-items: baseline;
     gap: 1rem;
@@ -99,45 +99,50 @@ const next =
   }
   .section-toc {
     margin: 0 0 2rem;
-    padding: 0.75rem 1rem 0.85rem;
-    background: var(--bg-sidebar);
-    border: 1px solid var(--border);
-    border-radius: 8px;
+    padding: 0.85rem 1.1rem 1rem;
+    background: var(--bg-side);
+    border: 1px solid var(--border-soft);
   }
   .section-toc summary {
-    cursor: pointer; font-weight: 600; font-size: 0.875rem;
-    color: var(--text-soft);
+    cursor: pointer; font-weight: 400; font-size: 0.78rem;
+    color: var(--muted);
     list-style: none;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-family: var(--sans);
   }
   .section-toc summary::-webkit-details-marker { display: none; }
-  .section-toc summary::before { content: '▸ '; color: var(--c-accent); }
+  .section-toc summary::before { content: '▸ '; color: var(--accent); }
   .section-toc[open] summary::before { content: '▾ '; }
   .section-toc ol {
-    margin: 0.6rem 0 0; padding-left: 1.25rem;
+    margin: 0.8rem 0 0; padding-left: 1.25rem;
     columns: 2; column-gap: 1.5rem;
   }
-  .section-toc li { margin: 0.2rem 0; break-inside: avoid; }
-  .section-toc a { font-size: 0.82rem; color: var(--text); }
-  .section-toc a:hover { color: var(--c-accent); }
+  .section-toc li { margin: 0.25rem 0; break-inside: avoid; }
+  .section-toc a { font-size: 0.85rem; color: var(--fg); }
+  .section-toc a:hover { color: var(--accent); }
   @media (max-width: 640px) { .section-toc ol { columns: 1; } }
   .chapter-head h1 {
     margin: 0;
-    font-size: clamp(1.5rem, 1rem + 2vw, 2.25rem);
-    font-weight: 800;
-    letter-spacing: -0.01em;
+    font-size: clamp(1.6rem, 1rem + 2vw, 2.2rem);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+    color: var(--fg-strong);
   }
   .lang-badge {
-    font-size: 0.75rem;
-    background: var(--c-accent-soft);
-    color: var(--c-accent);
-    padding: 0.25em 0.7em;
-    border-radius: 999px;
-    font-weight: 600;
-    letter-spacing: 0.02em;
+    font-size: 0.72rem;
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 0.2em 0.65em;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-family: var(--sans);
   }
   .lang-badge.partial {
     background: #fff3cd;
-    color: #92600c;
+    color: #8a5a00;
   }
   :root[data-theme='dark'] .lang-badge.partial {
     background: #3a2f12;
@@ -149,35 +154,37 @@ const next =
     max-width: 48rem;
   }
   .zh-only :global(h2) {
-    font-size: 1.35rem;
-    font-weight: 700;
+    font-size: 1.3rem;
+    font-weight: 400;
     margin: 2rem 0 0.75rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border-soft);
+    color: var(--fg-strong);
+    line-height: 1.25;
   }
   .zh-only :global(h3) {
     font-size: 1.1rem;
-    font-weight: 700;
+    font-weight: 500;
     margin: 1.5rem 0 0.5rem;
+    color: var(--fg-strong);
   }
   .zh-only :global(p) { margin: 0 0 1rem; }
   .zh-only :global(blockquote) {
-    border-left: 3px solid var(--c-accent);
-    padding: 0.5rem 1rem;
+    border-left: 3px solid var(--border);
+    padding: 0.2rem 0 0.2rem 1.1rem;
     margin: 1rem 0;
-    color: var(--text-soft);
-    background: var(--bg-sidebar);
-    border-radius: 0 6px 6px 0;
+    color: var(--muted);
+    font-style: italic;
   }
   .zh-only :global(ul), .zh-only :global(ol) {
-    margin: 0 0 1rem; padding-left: 1.75rem;
+    margin: 0 0 1rem; padding-left: 1.4rem;
   }
   .zh-only :global(li) { margin: 0.3rem 0; }
   .zh-only :global(code) {
-    font-family: ui-monospace, 'SF Mono', Consolas, monospace;
-    font-size: 0.875em;
-    background: var(--border);
-    padding: 0.15em 0.35em;
-    border-radius: 4px;
+    font-family: var(--mono);
+    font-size: 0.86em;
+    background: var(--bg-side);
+    padding: 0.08em 0.3em;
+    border-radius: 2px;
   }
 </style>
