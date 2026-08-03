@@ -47,23 +47,30 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <style>
   .prose { max-width: 44rem; }
-  .prose h1 { font-size: 2rem; font-weight: 800; margin: 0 0 1rem; letter-spacing: -0.01em; }
-  .prose .lead { font-size: 1.1rem; color: var(--text-soft); margin: 0 0 2rem; }
+  .prose h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.9rem, 1.3rem + 2vw, 2.5rem);
+    font-weight: 700; margin: 0 0 1.1rem; letter-spacing: 0.01em;
+  }
+  .prose .lead { font-size: 1.05rem; color: var(--text-soft); margin: 0 0 2.25rem; line-height: 1.85; }
   .prose h2 {
-    font-size: 1.25rem; font-weight: 700;
-    margin: 2rem 0 0.75rem; padding-top: 1.5rem;
+    font-family: var(--font-serif);
+    font-size: 1.3rem; font-weight: 700;
+    margin: 2.25rem 0 0.85rem; padding-top: 1.5rem;
     border-top: 1px solid var(--border);
   }
-  .prose p { margin: 0 0 1rem; line-height: 1.75; }
-  .prose ul { margin: 0 0 1rem; padding-left: 1.5rem; }
-  .prose li { margin: 0.4rem 0; line-height: 1.7; }
+  .prose p { margin: 0 0 1rem; line-height: 1.85; }
+  .prose ul { margin: 0 0 1rem; padding-left: 1.6rem; }
+  .prose li { margin: 0.45rem 0; line-height: 1.75; }
   .prose blockquote {
     border-left: 3px solid var(--c-accent);
-    padding: 0.75rem 1.25rem;
-    margin: 2rem 0 0;
+    padding: 0.85rem 1.3rem;
+    margin: 2.25rem 0 0;
     color: var(--text-soft);
-    font-style: italic;
     background: var(--bg-sidebar);
-    border-radius: 0 8px 8px 0;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.02rem;
   }
 </style>

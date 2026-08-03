@@ -40,25 +40,28 @@ const base = import.meta.env.BASE_URL;
   .chapter-nav {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 0.75rem;
-    margin-top: 3rem;
-    padding-top: 1.5rem;
-    border-top: 2px solid var(--sl-color-gray-7, #e5e5e5);
+    gap: 0.85rem;
+    margin-top: 3.25rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--border);
   }
   .nav-card {
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
-    padding: 0.75rem 1rem;
-    border: 1px solid var(--sl-color-gray-7, #e5e5e5);
-    border-radius: 8px;
+    gap: 0.35rem;
+    padding: 0.9rem 1.1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
     text-decoration: none;
     color: inherit;
+    background: var(--bg);
     transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
   }
   .nav-card:hover {
-    border-color: var(--c-accent, #6cb6ff);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+    text-decoration: none;
   }
   .nav-card--prev {
     text-align: left;
@@ -70,24 +73,29 @@ const base = import.meta.env.BASE_URL;
   .nav-card--handbook {
     text-align: center;
     align-items: center;
-    background: var(--c-accent-soft, #f0f6ff);
-    border-color: var(--c-accent-soft, #d6e8ff);
+    background: var(--c-accent-soft);
+    border-color: color-mix(in srgb, var(--c-accent) 25%, transparent);
+  }
+  .nav-card--handbook:hover {
+    border-color: var(--c-accent);
+    box-shadow: var(--shadow-md);
   }
   .nav-card--placeholder {
     visibility: hidden;
   }
   .nav-label {
-    font-size: 0.75rem;
-    color: var(--sl-color-gray-3, #888);
+    font-size: 0.72rem;
+    color: var(--text-soft);
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.06em;
   }
   .nav-card--handbook .nav-label {
-    color: var(--c-accent-deep, #2563eb);
+    color: var(--c-accent);
   }
   .nav-title {
-    font-weight: 600;
-    font-size: 0.9rem;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 0.95rem;
   }
   @media (max-width: 720px) {
     .chapter-nav {

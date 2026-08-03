@@ -12,41 +12,25 @@ import rehypeStringify from 'rehype-stringify';
  * 这样两份 md 解析出的块数组按位置配对即可形成逐段并排。
  */
 
-type Node = {
-  type: string;
-  children?: Node[];
-  value?: string;
-  [key: string]: unknown;
-};
-
-type Parent = Node & { children: Node[] };
-
-function isParent(node: Node): node is Parent {
-  return Array.isArray((node as Parent).children);
-}
-
-/**
- * 把单个 mdast 节点渲染成 HTML 片段。
- */
-async function renderNode(node: Node): Promise<string> {
-  // remark-rehype 期望一个 root，所以包一层
-  const wrapped = { type: 'root', children: [node] };
-  const file = await unified()
-    .use(remarkRehype, { allowDangerousHtml: false })
-    .use(rehypeStringify)
-    .run(wrapped);
-  const result = String(file);
-  return result.trim();
-}
-
 /**
  * 将 markdown 文本拆为 top-level HTML 块数组。
+ *
+ * 实现要点：parse 得到 mdast 后，先一次性 run 成 hast（remark-rehype 是
+ * transformer），再对每个 top-level 块单独 stringify（rehype-stringify 是
+ * compiler，只在 stringify/process 阶段生效）。
+ * 注意不能对 hast 树直接 String()——那只会得到 "[object Object]"。
+ * 只 run 不 stringify 是本节早期版本出现过的一个真 bug，见 git 历史。
  */
 export async function parseToBlocks(md: string): Promise<string[]> {
-  const parsed = await unified().use(remarkParse).parse(md);
+  const mdast = unified().use(remarkParse).parse(md);
+  const hast = await unified()
+    .use(remarkRehype, { allowDangerousHtml: false })
+    .run(mdast);
+  const stringifier = unified().use(rehypeStringify);
   const blocks: string[] = [];
-  for (const child of parsed.children) {
-    const html = await renderNode(child);
+  for (const child of hast.children ?? []) {
+    // rehype-stringify 期望一个 root，所以包一层
+    const html = stringifier.stringify({ type: 'root', children: [child] });
     if (html.length > 0) blocks.push(html);
   }
   return blocks;

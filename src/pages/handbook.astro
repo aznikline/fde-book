@@ -8,6 +8,10 @@ const entry = (await getCollection('handbook')).find(
 );
 const body = entry?.body ?? '';
 const { html, toc } = await renderMarkdownWithToc(body);
+
+// 手册正文用 ❗ 标记高危信号/红线，它是 emoji 字符、跨平台渲染风格不一，
+// 统一替换为排版稳定的几何符号 ▲（文本渲染，非 emoji）。
+const renderedHtml = html.replace(/❗/g, '▲');
 ---
 
 <BaseLayout title="工作手册" activeSlug="handbook">
@@ -17,8 +21,8 @@ const { html, toc } = await renderMarkdownWithToc(body);
       <h1>FDE 工作手册</h1>
       <p class="lead">
         全书方法论整理成一份按交付旅程排的检查清单。
-        每个阶段含核心信条、决策清单、高危信号(❗)、阈值和关键产出物。
-        方括号是可勾选项；带 ❗ 的是书里标过的高危信号或红线。
+        每个阶段含核心信条、决策清单、高危信号（▲）、阈值和关键产出物。
+        方括号是可勾选项；带 ▲ 的是书里标过的高危信号或红线。
       </p>
     </header>
 
@@ -35,90 +39,94 @@ const { html, toc } = await renderMarkdownWithToc(body);
       )
     }
 
-    <div class="handbook-body" set:html={html} />
+    <div class="handbook-body" set:html={renderedHtml} />
   </article>
 </BaseLayout>
 
 <style is:global>
   .handbook { max-width: 50rem; }
-  .handbook-head { margin-bottom: 2rem; }
+  .handbook-head { margin-bottom: 2.25rem; }
   .eyebrow {
-    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em;
-    color: var(--c-accent); font-weight: 700; margin: 0 0 0.5rem;
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.16em;
+    color: var(--c-accent); font-weight: 700; margin: 0 0 0.6rem;
   }
   .handbook-head h1 {
-    font-size: clamp(1.75rem, 1.2rem + 2vw, 2.5rem);
-    font-weight: 800; margin: 0 0 0.75rem; letter-spacing: -0.01em;
+    font-family: var(--font-serif);
+    font-size: clamp(1.9rem, 1.3rem + 2vw, 2.6rem);
+    font-weight: 700; margin: 0 0 0.85rem; letter-spacing: 0.01em;
   }
   .handbook-head .lead {
     font-size: 0.95rem; color: var(--text-soft);
-    line-height: 1.7; margin: 0; max-width: 40rem;
+    line-height: 1.85; margin: 0; max-width: 42rem;
   }
   .handbook-toc {
     background: var(--bg-sidebar);
     border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 1rem 1.25rem;
+    border-radius: var(--radius);
+    padding: 1.1rem 1.3rem;
     margin-bottom: 2.5rem;
   }
   .handbook-toc .toc-title {
     font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.08em; color: var(--text-soft); margin: 0 0 0.5rem;
+    letter-spacing: 0.1em; color: var(--text-soft); margin: 0 0 0.55rem;
   }
   .handbook-toc ul {
     list-style: none; padding: 0; margin: 0;
-    columns: 2; column-gap: 1.5rem;
+    columns: 2; column-gap: 1.75rem;
   }
-  .handbook-toc li { margin: 0.2rem 0; break-inside: avoid; }
+  .handbook-toc li { margin: 0.25rem 0; break-inside: avoid; }
   .handbook-toc a { font-size: 0.85rem; color: var(--text); }
   .handbook-toc a:hover { color: var(--c-accent); }
   @media (max-width: 600px) { .handbook-toc ul { columns: 1; } }
 
-  .handbook-body { font-size: 0.9rem; line-height: 1.7; }
+  .handbook-body { font-size: 0.925rem; line-height: 1.85; }
   .handbook-body :global(h2) {
-    font-size: 1.3rem; font-weight: 800; margin: 2.5rem 0 1rem;
-    padding-top: 1.5rem; border-top: 2px solid var(--border);
-    letter-spacing: -0.01em;
-    scroll-margin-top: 4rem;
+    font-family: var(--font-serif);
+    font-size: 1.35rem; font-weight: 700; margin: 2.75rem 0 1rem;
+    padding-top: 1.6rem; border-top: 1px solid var(--border);
+    letter-spacing: 0.01em;
+    scroll-margin-top: 4.5rem;
   }
   .handbook-body :global(h3) {
-    font-size: 1.05rem; font-weight: 700; margin: 1.75rem 0 0.6rem;
-    scroll-margin-top: 4rem;
+    font-family: var(--font-serif);
+    font-size: 1.08rem; font-weight: 700; margin: 1.9rem 0 0.65rem;
+    scroll-margin-top: 4.5rem;
   }
   .handbook-body :global(h4) {
-    font-size: 0.95rem; font-weight: 700; margin: 1.25rem 0 0.5rem;
+    font-size: 0.95rem; font-weight: 700; margin: 1.3rem 0 0.5rem;
     color: var(--c-accent-deep);
   }
-  .handbook-body :global(p) { margin: 0 0 0.85rem; }
+  .handbook-body :global(p) { margin: 0 0 0.9rem; }
   .handbook-body :global(blockquote) {
     border-left: 3px solid var(--c-accent);
-    padding: 0.5rem 1rem; margin: 1rem 0;
+    padding: 0.55rem 1.1rem; margin: 1.1rem 0;
     color: var(--text-soft); background: var(--bg-sidebar);
-    border-radius: 0 6px 6px 0; font-size: 0.85rem;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: 0.88rem;
   }
   .handbook-body :global(ul), .handbook-body :global(ol) {
-    margin: 0 0 1rem; padding-left: 1.5rem;
+    margin: 0 0 1rem; padding-left: 1.6rem;
   }
-  .handbook-body :global(li) { margin: 0.35rem 0; }
+  .handbook-body :global(li) { margin: 0.4rem 0; }
   .handbook-body :global(code) {
-    font-family: ui-monospace, 'SF Mono', Consolas, monospace;
-    font-size: 0.85em; background: var(--border);
+    font-family: var(--font-mono);
+    font-size: 0.85em; background: var(--bg-code);
+    border: 1px solid var(--border);
     padding: 0.1em 0.35em; border-radius: 4px;
   }
   .handbook-body :global(pre) {
     background: var(--bg-sidebar); border: 1px solid var(--border);
-    border-radius: 8px; padding: 1rem; overflow-x: auto;
-    font-size: 0.8rem; line-height: 1.6;
+    border-radius: var(--radius); padding: 1rem; overflow-x: auto;
+    font-size: 0.8rem; line-height: 1.65;
   }
   .handbook-body :global(pre code) {
-    background: none; padding: 0; font-size: inherit;
+    background: none; border: none; padding: 0; font-size: inherit;
   }
   .handbook-body :global(table) {
     width: 100%; border-collapse: collapse; margin: 1rem 0;
     font-size: 0.85rem;
   }
   .handbook-body :global(th), .handbook-body :global(td) {
-    border: 1px solid var(--border); padding: 0.5rem 0.75rem; text-align: left;
+    border: 1px solid var(--border); padding: 0.55rem 0.8rem; text-align: left;
   }
   .handbook-body :global(th) {
     background: var(--bg-sidebar); font-weight: 700;
@@ -127,5 +135,9 @@ const { html, toc } = await renderMarkdownWithToc(body);
   .handbook-body :global(hr) {
     border: none; border-top: 1px solid var(--border);
     margin: 2rem 0;
+  }
+  /* 高危信号 ▲ 标记：警示色，行内醒目但不喧宾夺主 */
+  .handbook-body :global(li), .handbook-body :global(p) {
+    color: var(--text);
   }
 </style>
