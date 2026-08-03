@@ -5,30 +5,32 @@ import { chapters, titles } from '../lib/chapters';
 
 <BaseLayout title="首页">
   <section class="hero">
-    <p class="hero-eyebrow">中英对照阅读 · 工作手册</p>
-    <h1 class="hero-title">前线部署工程师</h1>
-    <p class="hero-sub">
-      人工智能时代的客户价值交付秘籍。<br />
-      范冰著 · 免费公开全文 · 此站提供中英逐段对照阅读与可执行工作手册。
-    </p>
-    <div class="hero-cta">
-      <a class="btn btn-primary" href="/chapters/chapter-1-rise-of-fde/">
-        开始阅读 →
-      </a>
-      <a class="btn btn-ghost" href="/handbook/">查看工作手册</a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat">
-        <span class="stat-num">12</span>
-        <span class="stat-label">章节</span>
+    <div class="hero-inner">
+      <p class="hero-eyebrow">中英对照阅读 · 工作手册</p>
+      <h1 class="hero-title">前线部署工程师</h1>
+      <p class="hero-sub">
+        人工智能时代的客户价值交付秘籍。<br />
+        范冰著 · 免费公开全文 · 此站提供中英逐段对照阅读与可执行工作手册。
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="/chapters/chapter-1-rise-of-fde/">
+          开始阅读 →
+        </a>
+        <a class="btn btn-ghost" href="/handbook/">查看工作手册</a>
       </div>
-      <div class="stat">
-        <span class="stat-num">120</span>
-        <span class="stat-label">真实案例</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">6</span>
-        <span class="stat-label">交付阶段</span>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">12</span>
+          <span class="stat-label">章节</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">120</span>
+          <span class="stat-label">真实案例</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">6</span>
+          <span class="stat-label">交付阶段</span>
+        </div>
       </div>
     </div>
   </section>
@@ -54,14 +56,17 @@ import { chapters, titles } from '../lib/chapters';
     <h2 class="section-title">本站提供</h2>
     <div class="feature-grid">
       <a class="feature" href="/chapters/chapter-1-rise-of-fde/">
+        <div class="feature-icon">📖</div>
         <h3>中英对照原文</h3>
         <p>逐段并排阅读，中文在左、英文在右，移动端自动堆叠。便于精读与术语对照。</p>
       </a>
       <a class="feature" href="/handbook/">
+        <div class="feature-icon">✅</div>
         <h3>可执行工作手册</h3>
         <p>把全书方法论提炼为按交付旅程组织的检查清单，每项带阈值与高危信号，可直接落地。</p>
       </a>
       <a class="feature" href="/metrics/">
+        <div class="feature-icon">📊</div>
         <h3>指标速查</h3>
         <p>FDE 全链路指标体系一页纸：TTV、NRR、毛利率、转化率——每项附参考标准与警戒线。</p>
       </a>
@@ -71,106 +76,96 @@ import { chapters, titles } from '../lib/chapters';
 
 <style>
   .hero {
-    padding: 1.5rem 0 1.5rem;
-    border-bottom: 1px solid var(--border-soft);
-    margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, var(--c-accent-soft) 0%, var(--bg) 100%);
+  }
+  :root[data-theme='dark'] .hero {
+    background: linear-gradient(180deg, var(--c-accent-soft) 0%, var(--bg) 100%);
+  }
+  .hero-inner {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: clamp(2.5rem, 8vw, 5rem) 1.5rem;
+    text-align: center;
   }
   .hero-eyebrow {
-    font-size: 0.72rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--muted);
-    margin: 0 0 0.8rem;
-    font-family: var(--sans);
+    letter-spacing: 0.15em;
+    color: var(--c-accent);
+    font-weight: 600;
+    margin: 0 0 1rem;
   }
   .hero-title {
-    font-size: clamp(2.4rem, 1rem + 7vw, 3.8rem);
-    font-weight: 400;
-    letter-spacing: 0.01em;
-    margin: 0 0 0.9rem;
-    line-height: 1.12;
-    color: var(--fg-strong);
+    font-size: clamp(2.5rem, 4rem + 4vw, 4.5rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    margin: 0 0 1.25rem;
+    line-height: 1.1;
   }
   .hero-sub {
-    font-size: clamp(1rem, 0.9rem + 0.4vw, 1.1rem);
-    color: var(--muted);
-    margin: 0 0 1.8rem;
+    font-size: clamp(1rem, 0.9rem + 0.5vw, 1.2rem);
+    color: var(--text-soft);
+    margin: 0 auto 2rem;
     line-height: 1.7;
-    max-width: 38rem;
+    max-width: 36rem;
   }
   .hero-cta {
     display: flex;
     gap: 0.75rem;
+    justify-content: center;
     flex-wrap: wrap;
     margin-bottom: 2.5rem;
   }
   .btn {
     display: inline-flex;
     align-items: center;
-    padding: 0.55rem 1.4rem;
-    font-weight: 400;
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
     font-size: 0.95rem;
-    font-family: var(--serif);
-    border: 1px solid var(--border);
-    transition: border-color 0.15s, color 0.15s, background 0.15s;
+    transition: transform 0.12s, box-shadow 0.12s;
   }
-  .btn:hover { text-decoration: none; transform: none; }
+  .btn:hover { text-decoration: none; transform: translateY(-1px); }
   .btn-primary {
-    background: var(--fg-strong);
+    background: var(--c-accent);
     color: #fff;
-    border-color: var(--fg-strong);
-  }
-  .btn-primary:hover {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #fff;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
   }
   .btn-ghost {
     background: transparent;
-    color: var(--fg);
-  }
-  .btn-ghost:hover {
-    border-color: var(--accent);
-    color: var(--accent);
+    color: var(--text);
+    border: 1px solid var(--border);
   }
   .hero-stats {
     display: flex;
     gap: 2.5rem;
+    justify-content: center;
     flex-wrap: wrap;
-    border-top: 1px solid var(--border-soft);
-    padding-top: 1.5rem;
   }
-  .stat { display: flex; flex-direction: column; }
+  .stat { display: flex; flex-direction: column; align-items: center; }
   .stat-num {
     font-size: 2rem;
-    font-weight: 400;
-    color: var(--fg-strong);
-    line-height: 1.1;
-    font-variant-numeric: oldstyle-nums;
+    font-weight: 800;
+    color: var(--c-accent);
+    line-height: 1;
   }
   .stat-label {
-    font-size: 0.78rem;
-    color: var(--muted);
-    margin-top: 0.3rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-family: var(--sans);
+    font-size: 0.8rem;
+    color: var(--text-soft);
+    margin-top: 0.25rem;
   }
 
   .chapter-list, .features {
-    max-width: 50rem;
-    margin: 0 0 2.5rem;
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: clamp(2rem, 5vw, 3.5rem) 1.5rem;
   }
   .section-title {
-    font-size: 0.78rem;
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--muted);
-    margin: 0 0 1.3rem;
-    border-bottom: 1px solid var(--border-soft);
-    padding-bottom: 0.5rem;
-    font-family: var(--sans);
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin: 0 0 1.5rem;
+    letter-spacing: -0.01em;
   }
   .toc {
     list-style: none;
@@ -178,69 +173,51 @@ import { chapters, titles } from '../lib/chapters';
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 0;
-    border: 1px solid var(--border-soft);
+    gap: 0.25rem;
   }
   .toc li a {
     display: flex;
-    align-items: baseline;
-    gap: 1rem;
-    padding: 0.85rem 1.1rem;
-    color: var(--fg);
-    border-bottom: 1px solid var(--border-soft);
-    transition: background 0.12s, color 0.12s;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 0.75rem;
+    border-radius: 8px;
+    color: var(--text);
+    transition: background 0.12s;
   }
-  .toc li:last-child a { border-bottom: none; }
   .toc li a:hover {
-    background: var(--bg-side);
+    background: var(--c-accent-soft);
     text-decoration: none;
-    color: var(--accent);
   }
   .toc-num {
-    font-size: 0.78rem;
-    color: var(--muted);
-    font-variant-numeric: oldstyle-nums;
+    font-size: 0.75rem;
+    color: var(--text-soft);
+    font-variant-numeric: tabular-nums;
     min-width: 1.5rem;
-    font-family: var(--mono);
   }
-  .toc-title { flex: 1; font-weight: 400; }
-  .toc-arrow {
-    color: var(--muted);
-    opacity: 0;
-    transition: opacity 0.12s, transform 0.12s;
-  }
+  .toc-title { flex: 1; font-weight: 500; }
+  .toc-arrow { color: var(--text-soft); opacity: 0; transition: opacity 0.12s, transform 0.12s; }
   .toc li a:hover .toc-arrow { opacity: 1; transform: translateX(3px); }
 
   .feature-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-    gap: 1px;
-    background: var(--border-soft);
-    border: 1px solid var(--border-soft);
+    gap: 1rem;
   }
   .feature {
     display: block;
-    padding: 1.4rem 1.5rem;
-    color: var(--fg);
-    background: var(--bg);
-    transition: background 0.12s, color 0.12s;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: inherit;
+    transition: border-color 0.12s, box-shadow 0.12s, transform 0.12s;
   }
   .feature:hover {
     text-decoration: none;
-    background: var(--bg-side);
-    color: var(--accent);
+    border-color: var(--c-accent);
+    box-shadow: 0 4px 16px var(--shadow);
+    transform: translateY(-2px);
   }
-  .feature h3 {
-    margin: 0 0 0.5rem;
-    font-size: 1.1rem;
-    font-weight: 400;
-    color: var(--fg-strong);
-  }
-  .feature:hover h3 { color: var(--accent); }
-  .feature p {
-    margin: 0;
-    font-size: 0.88rem;
-    color: var(--muted);
-    line-height: 1.65;
-  }
+  .feature-icon { font-size: 1.75rem; margin-bottom: 0.5rem; }
+  .feature h3 { margin: 0 0 0.4rem; font-size: 1.05rem; }
+  .feature p { margin: 0; font-size: 0.875rem; color: var(--text-soft); line-height: 1.6; }
 </style>
