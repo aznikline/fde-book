@@ -12,12 +12,22 @@
 
 ```bash
 pnpm install
-pnpm dev      # 开发服务器，默认 http://localhost:4321
+pnpm dev      # 开发服务器，http://localhost:4321/fde-book/
 pnpm build    # 生成静态站点到 dist/
 pnpm preview  # 预览构建产物
 ```
 
 > 需要 Node 18+ 与 pnpm。本项目在 Node 26 下需要 `NODE_OPTIONS="--require $(pwd)/scripts/polyfill.cjs"` 预加载（见 `package.json` 的 `build`/`dev` 脚本），以补回 Rollup 在纯 ESM 下缺失的 `__dirname`。
+
+## 部署（GitHub Pages）
+
+站点配置为部署到 `https://aznikline.github.io/fde-book/`（项目页，非根路径）。
+`.github/workflows/deploy.yml` 会在 push 到 `master` 时自动构建并部署。
+
+**首次启用需在 GitHub 仓库：**
+Settings → Pages → Build and deployment → Source 选 **GitHub Actions**。
+
+`base: '/fde-book/'` 已配在 `astro.config.mjs`，站内链接通过 `import.meta.env.BASE_URL` 自动加前缀，子路径部署下不会 404。
 
 ## 项目结构
 
@@ -60,8 +70,8 @@ const pairs = pairBlocks(zhBlocks, enBlocks);  // [{zh, en, aligned}, ...]
 
 ## 翻译状态
 
-- [x] 第 1 章 FDE 的崛起（样板）
-- [ ] 第 2–8 章 + 后记 + 附录（逐章推进）
+- [x] 全书 12 章中英对照翻译完成（第 1–8 章 + 后记 + 附录 A/B/C）
+- [x] 全部段落对齐验证通过（共 719 对中英段落并排渲染）
 
 ## 术语对照
 

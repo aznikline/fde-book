@@ -10,23 +10,24 @@ interface Props {
   slug: string;
 }
 const { prev, next, slug } = Astro.props;
+const base = import.meta.env.BASE_URL;
 ---
 
 <nav class="chapter-nav" aria-label="章节导航">
   {prev ? (
-    <a class="nav-card nav-card--prev" href={`/chapters/${prev.slug}/`}>
+    <a class="nav-card nav-card--prev" href={`${base}chapters/${prev.slug}/`}>
       <span class="nav-label">← 上一章 / Previous</span>
       <span class="nav-title">{prev.title}</span>
     </a>
   ) : (
     <span class="nav-card nav-card--placeholder" />
   )}
-  <a class="nav-card nav-card--handbook" href={`/handbook/`}>
+  <a class="nav-card nav-card--handbook" href={`${base}handbook/`}>
     <span class="nav-label">本章实操清单</span>
     <span class="nav-title">→ 工作手册</span>
   </a>
   {next ? (
-    <a class="nav-card nav-card--next" href={`/chapters/${next.slug}/`}>
+    <a class="nav-card nav-card--next" href={`${base}chapters/${next.slug}/`}>
       <span class="nav-label">下一章 / Next →</span>
       <span class="nav-title">{next.title}</span>
     </a>

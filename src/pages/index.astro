@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { chapters, titles } from '../lib/chapters';
+const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="首页">
@@ -13,10 +14,10 @@ import { chapters, titles } from '../lib/chapters';
         范冰著 · 免费公开全文 · 此站提供中英逐段对照阅读与可执行工作手册。
       </p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="/chapters/chapter-1-rise-of-fde/">
+        <a class="btn btn-primary" href={`${base}chapters/chapter-1-rise-of-fde/`}>
           开始阅读 →
         </a>
-        <a class="btn btn-ghost" href="/handbook/">查看工作手册</a>
+        <a class="btn btn-ghost" href={`${base}handbook/`}>查看工作手册</a>
       </div>
       <div class="hero-stats">
         <div class="stat">
@@ -41,7 +42,7 @@ import { chapters, titles } from '../lib/chapters';
       {
         chapters.map((slug, i) => (
           <li>
-            <a href={`/chapters/${slug}/`}>
+            <a href={`${base}chapters/${slug}/`}>
               <span class="toc-num">{String(i + 1).padStart(2, '0')}</span>
               <span class="toc-title">{titles[slug]}</span>
               <span class="toc-arrow">→</span>
@@ -55,17 +56,17 @@ import { chapters, titles } from '../lib/chapters';
   <section class="features">
     <h2 class="section-title">本站提供</h2>
     <div class="feature-grid">
-      <a class="feature" href="/chapters/chapter-1-rise-of-fde/">
+      <a class="feature" href={`${base}chapters/chapter-1-rise-of-fde/`}>
         <div class="feature-icon">📖</div>
         <h3>中英对照原文</h3>
         <p>逐段并排阅读，中文在左、英文在右，移动端自动堆叠。便于精读与术语对照。</p>
       </a>
-      <a class="feature" href="/handbook/">
+      <a class="feature" href={`${base}handbook/`}>
         <div class="feature-icon">✅</div>
         <h3>可执行工作手册</h3>
         <p>把全书方法论提炼为按交付旅程组织的检查清单，每项带阈值与高危信号，可直接落地。</p>
       </a>
-      <a class="feature" href="/metrics/">
+      <a class="feature" href={`${base}metrics/`}>
         <div class="feature-icon">📊</div>
         <h3>指标速查</h3>
         <p>FDE 全链路指标体系一页纸：TTV、NRR、毛利率、转化率——每项附参考标准与警戒线。</p>
