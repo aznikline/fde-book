@@ -14,9 +14,6 @@ const pairs = pairBlocks(zhBlocks, enBlocks);
 ---
 
 <div class="parallel">
-  <div class="parallel-legend" aria-hidden="true">
-    <span>中文</span><span class="legend-dot">／</span><span>English</span>
-  </div>
   {
     pairs.map((p, i) => (
       <div class={`pair${p.aligned ? '' : ' pair--unaligned'}`} data-index={i}>
@@ -31,153 +28,130 @@ const pairs = pairBlocks(zhBlocks, enBlocks);
   .parallel {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-  }
-  /* 极简图例：只在对照区顶部出现一次，低调不强调 */
-  .parallel-legend {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-size: 0.72rem;
-    color: var(--text-soft);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    opacity: 0.75;
-    margin-bottom: -0.5rem;
-  }
-  .parallel-legend .legend-dot {
-    opacity: 0.5;
+    gap: 1.1rem;
   }
   .pair {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
     align-items: start;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 1.5rem;
   }
-  .pair:last-child {
-    border-bottom: none;
-  }
-  /* 未对齐块加警示边框，方便译者自查 */
+  /* 未对齐块加警示底色，方便译者自查 */
   .pair--unaligned {
     background: var(--c-warn);
     box-shadow: inset 3px 0 0 var(--c-warn);
-    padding: 0.75rem 1rem;
-    border-radius: var(--radius);
+    padding: 0.6rem 0.9rem;
+    border-radius: 2px;
     background: color-mix(in srgb, var(--c-warn) 7%, transparent);
   }
   .pair__zh,
   .pair__en {
-    font-size: 1rem;
-    line-height: 1.85;
+    font-size: 0.98rem;
+    line-height: 1.75;
     overflow-wrap: break-word;
   }
   .pair__zh :global(h1),
   .pair__en :global(h1) {
-    font-family: var(--font-serif);
     font-size: 1.5rem;
-    font-weight: 700;
-    margin: 0 0 0.75rem;
+    font-weight: 400;
+    margin: 0 0 0.9rem;
+    color: var(--text-strong);
   }
   .pair__zh :global(h2),
   .pair__en :global(h2) {
-    font-family: var(--font-serif);
-    font-size: 1.28rem;
-    font-weight: 700;
-    margin: 1.4rem 0 0.6rem;
-    padding-top: 1.4rem;
-    border-top: 1px dashed var(--border-strong);
+    font-size: 1.3rem;
+    font-weight: 400;
+    margin: 2.4rem 0 0.9rem;
+    color: var(--text-strong);
+    border-bottom: 1px solid var(--border-soft);
+    padding-bottom: 0.3rem;
   }
   .pair__zh :global(h3),
   .pair__en :global(h3) {
-    font-family: var(--font-serif);
     font-size: 1.1rem;
-    font-weight: 700;
-    margin: 1.1rem 0 0.45rem;
+    font-weight: 400;
+    margin: 1.8rem 0 0.6rem;
+    color: var(--text-strong);
   }
   .pair__zh :global(p),
   .pair__en :global(p) {
-    margin: 0 0 0.7rem;
+    margin: 0.9rem 0;
   }
-  .pair__zh :global(p:last-child),
-  .pair__en :global(p:last-child) {
-    margin-bottom: 0;
+  .pair__zh :global(p:first-of-type),
+  .pair__en :global(p:first-of-type) {
+    margin-top: 0;
   }
   .pair__zh :global(blockquote),
   .pair__en :global(blockquote) {
-    border-left: 3px solid var(--c-accent);
-    padding: 0.3rem 0.85rem;
-    margin: 0 0 0.7rem;
+    margin: 0.9rem 0;
+    padding-left: 1.2rem;
+    border-left: 3px solid var(--border);
     color: var(--text-soft);
-    background: var(--bg-sidebar);
-    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    font-style: normal;
   }
   .pair__zh :global(ul),
   .pair__zh :global(ol),
   .pair__en :global(ul),
   .pair__en :global(ol) {
-    margin: 0 0 0.7rem;
-    padding-left: 1.5rem;
+    margin: 0.9rem 0;
+    padding-left: 1.4rem;
   }
   .pair__zh :global(li),
   .pair__en :global(li) {
-    margin: 0.25rem 0;
+    margin: 0.3rem 0;
   }
   .pair__zh :global(code),
   .pair__en :global(code) {
     font-family: var(--font-mono);
-    font-size: 0.85em;
+    font-size: 0.86em;
     background: var(--bg-code);
+    border-radius: 2px;
+    padding: 0.08rem 0.3rem;
+  }
+  .pair__zh :global(pre),
+  .pair__en :global(pre) {
+    background: var(--bg-code);
+    border: 1px solid var(--border-soft);
+    border-radius: 2px;
+    padding: 1rem;
+    overflow-x: auto;
+  }
+  .pair__zh :global(pre code),
+  .pair__en :global(pre code) {
+    background: none;
+    padding: 0;
+  }
+  .pair__zh :global(table),
+  .pair__en :global(table) {
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin: 0.9rem 0;
+  }
+  .pair__zh :global(th),
+  .pair__zh :global(td),
+  .pair__en :global(th),
+  .pair__en :global(td) {
     border: 1px solid var(--border);
-    padding: 0.1em 0.35em;
-    border-radius: 4px;
-  }
-  .pair__zh :global(a),
-  .pair__en :global(a) {
-    color: var(--c-accent);
-    text-decoration: none;
-    border-bottom: 1px solid color-mix(in srgb, var(--c-accent) 35%, transparent);
-  }
-  .pair__zh :global(a:hover),
-  .pair__en :global(a:hover) {
-    text-decoration: none;
-    border-bottom-color: var(--c-accent);
+    padding: 0.35rem 0.65rem;
   }
   .pair__zh :global(strong),
   .pair__en :global(strong) {
-    font-weight: 700;
+    color: var(--text-strong);
   }
   .pair__en :global(.missing),
   .pair__zh :global(.missing) {
     color: var(--c-warn);
     font-style: italic;
-    opacity: 0.85;
-  }
-  /* 中文段落比英文略小，因为中文信息密度高、字形宽；保持两列视觉平衡 */
-  .pair__zh {
-    font-size: 0.965rem;
-    line-height: 1.9;
-  }
-  .pair__en {
-    font-size: 1rem;
-    line-height: 1.75;
   }
 
   /* 移动端：堆叠为上下，中文在上英文在下 */
   @media (max-width: 880px) {
     .pair {
       grid-template-columns: 1fr;
-      gap: 1.1rem;
+      gap: 1rem;
     }
     .pair__zh {
-      font-size: 1rem;
-      border-bottom: 1px dashed var(--border-strong);
-      padding-bottom: 0.9rem;
-    }
-    .pair__en {
-      padding-top: 0.15rem;
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 1rem;
     }
   }
 </style>

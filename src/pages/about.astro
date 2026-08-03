@@ -48,28 +48,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <style>
   .prose { max-width: 44rem; }
   .prose h1 {
-    font-family: var(--font-serif);
-    font-size: clamp(1.9rem, 1.3rem + 2vw, 2.5rem);
-    font-weight: 700; margin: 0 0 1.1rem; letter-spacing: 0.01em;
+    font-size: 1.8rem;
+    font-weight: 400; margin: 0 0 0.3rem;
+    color: var(--text-strong);
   }
-  .prose .lead { font-size: 1.05rem; color: var(--text-soft); margin: 0 0 2.25rem; line-height: 1.85; }
+  .prose .lead { font-size: 1.05rem; color: var(--text-soft); margin: 0.5rem 0 1.5rem; line-height: 1.75; }
   .prose h2 {
-    font-family: var(--font-serif);
-    font-size: 1.3rem; font-weight: 700;
-    margin: 2.25rem 0 0.85rem; padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
+    font-size: 1.3rem; font-weight: 400;
+    margin: 2.4rem 0 0.9rem;
+    color: var(--text-strong);
+    border-bottom: 1px solid var(--border-soft);
+    padding-bottom: 0.3rem;
   }
-  .prose p { margin: 0 0 1rem; line-height: 1.85; }
-  .prose ul { margin: 0 0 1rem; padding-left: 1.6rem; }
-  .prose li { margin: 0.45rem 0; line-height: 1.75; }
+  .prose p { margin: 0.9rem 0; line-height: 1.75; }
+  .prose ul { margin: 0.9rem 0; padding-left: 1.4rem; }
+  .prose li { margin: 0.3rem 0; line-height: 1.7; }
   .prose blockquote {
-    border-left: 3px solid var(--c-accent);
-    padding: 0.85rem 1.3rem;
-    margin: 2.25rem 0 0;
+    margin: 1.2rem 0 0;
+    padding-left: 1.2rem;
+    border-left: 3px solid var(--border);
     color: var(--text-soft);
-    background: var(--bg-sidebar);
-    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    font-family: var(--font-serif);
     font-style: italic;
     font-size: 1.02rem;
   }

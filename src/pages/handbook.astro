@@ -44,100 +44,98 @@ const renderedHtml = html.replace(/❗/g, '▲');
 </BaseLayout>
 
 <style is:global>
-  .handbook { max-width: 50rem; }
-  .handbook-head { margin-bottom: 2.25rem; }
+  .handbook { max-width: 44rem; }
+  .handbook-head { margin-bottom: 2rem; }
   .eyebrow {
-    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.16em;
-    color: var(--c-accent); font-weight: 700; margin: 0 0 0.6rem;
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--text-soft); margin: 0 0 0.5rem;
   }
   .handbook-head h1 {
-    font-family: var(--font-serif);
-    font-size: clamp(1.9rem, 1.3rem + 2vw, 2.6rem);
-    font-weight: 700; margin: 0 0 0.85rem; letter-spacing: 0.01em;
+    font-size: 1.8rem;
+    font-weight: 400; margin: 0 0 0.3rem;
+    color: var(--text-strong);
   }
   .handbook-head .lead {
-    font-size: 0.95rem; color: var(--text-soft);
-    line-height: 1.85; margin: 0; max-width: 42rem;
+    font-size: 1rem; color: var(--text-soft);
+    line-height: 1.75; margin: 0.5rem 0 0; max-width: 42rem;
   }
   .handbook-toc {
     background: var(--bg-sidebar);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.1rem 1.3rem;
-    margin-bottom: 2.5rem;
+    border-radius: 2px;
+    padding: 0.9rem 1.1rem;
+    margin-bottom: 2rem;
+    font-size: 0.92rem;
   }
   .handbook-toc .toc-title {
-    font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.1em; color: var(--text-soft); margin: 0 0 0.55rem;
+    font-size: 0.72rem; font-weight: 400; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--text-soft); margin: 0 0 0.5rem;
   }
   .handbook-toc ul {
     list-style: none; padding: 0; margin: 0;
     columns: 2; column-gap: 1.75rem;
   }
   .handbook-toc li { margin: 0.25rem 0; break-inside: avoid; }
-  .handbook-toc a { font-size: 0.85rem; color: var(--text); }
+  .handbook-toc a { font-size: 0.88rem; color: var(--text); }
   .handbook-toc a:hover { color: var(--c-accent); }
   @media (max-width: 600px) { .handbook-toc ul { columns: 1; } }
 
-  .handbook-body { font-size: 0.925rem; line-height: 1.85; }
+  .handbook-body { font-size: 0.98rem; line-height: 1.75; }
   .handbook-body :global(h2) {
-    font-family: var(--font-serif);
-    font-size: 1.35rem; font-weight: 700; margin: 2.75rem 0 1rem;
-    padding-top: 1.6rem; border-top: 1px solid var(--border);
-    letter-spacing: 0.01em;
+    font-size: 1.3rem; font-weight: 400; margin: 2.4rem 0 0.9rem;
+    color: var(--text-strong);
+    border-bottom: 1px solid var(--border-soft);
+    padding-bottom: 0.3rem;
     scroll-margin-top: 4.5rem;
   }
   .handbook-body :global(h3) {
-    font-family: var(--font-serif);
-    font-size: 1.08rem; font-weight: 700; margin: 1.9rem 0 0.65rem;
+    font-size: 1.1rem; font-weight: 400; margin: 1.8rem 0 0.6rem;
+    color: var(--text-strong);
     scroll-margin-top: 4.5rem;
   }
   .handbook-body :global(h4) {
-    font-size: 0.95rem; font-weight: 700; margin: 1.3rem 0 0.5rem;
-    color: var(--c-accent-deep);
+    font-size: 0.98rem; font-weight: 400; margin: 1.2rem 0 0.5rem;
+    color: var(--text-strong);
   }
-  .handbook-body :global(p) { margin: 0 0 0.9rem; }
+  .handbook-body :global(p) { margin: 0.9rem 0; }
   .handbook-body :global(blockquote) {
-    border-left: 3px solid var(--c-accent);
-    padding: 0.55rem 1.1rem; margin: 1.1rem 0;
-    color: var(--text-soft); background: var(--bg-sidebar);
-    border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: 0.88rem;
+    margin: 0.9rem 0;
+    padding-left: 1.2rem;
+    border-left: 3px solid var(--border);
+    color: var(--text-soft);
+    font-size: 0.95rem;
   }
   .handbook-body :global(ul), .handbook-body :global(ol) {
-    margin: 0 0 1rem; padding-left: 1.6rem;
+    margin: 0.9rem 0; padding-left: 1.4rem;
   }
-  .handbook-body :global(li) { margin: 0.4rem 0; }
+  .handbook-body :global(li) { margin: 0.3rem 0; }
   .handbook-body :global(code) {
     font-family: var(--font-mono);
-    font-size: 0.85em; background: var(--bg-code);
-    border: 1px solid var(--border);
-    padding: 0.1em 0.35em; border-radius: 4px;
+    font-size: 0.86em; background: var(--bg-code);
+    border-radius: 2px;
+    padding: 0.08rem 0.3rem;
   }
   .handbook-body :global(pre) {
-    background: var(--bg-sidebar); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 1rem; overflow-x: auto;
-    font-size: 0.8rem; line-height: 1.65;
+    background: var(--bg-code); border: 1px solid var(--border-soft);
+    border-radius: 2px; padding: 1rem; overflow-x: auto;
+    font-size: 0.86rem; line-height: 1.65;
   }
   .handbook-body :global(pre code) {
-    background: none; border: none; padding: 0; font-size: inherit;
+    background: none; padding: 0; font-size: inherit;
   }
   .handbook-body :global(table) {
-    width: 100%; border-collapse: collapse; margin: 1rem 0;
-    font-size: 0.85rem;
+    width: 100%; border-collapse: collapse; margin: 0.9rem 0;
+    font-size: 0.88rem;
   }
   .handbook-body :global(th), .handbook-body :global(td) {
-    border: 1px solid var(--border); padding: 0.55rem 0.8rem; text-align: left;
+    border: 1px solid var(--border); padding: 0.35rem 0.65rem; text-align: left;
   }
   .handbook-body :global(th) {
-    background: var(--bg-sidebar); font-weight: 700;
+    font-weight: 400; color: var(--text-soft); background: var(--bg-sidebar);
   }
-  .handbook-body :global(strong) { font-weight: 700; }
+  .handbook-body :global(strong) { color: var(--text-strong); }
   .handbook-body :global(hr) {
     border: none; border-top: 1px solid var(--border);
     margin: 2rem 0;
-  }
-  /* 高危信号 ▲ 标记：警示色，行内醒目但不喧宾夺主 */
-  .handbook-body :global(li), .handbook-body :global(p) {
-    color: var(--text);
   }
 </style>

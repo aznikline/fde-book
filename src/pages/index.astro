@@ -6,279 +6,120 @@ const base = import.meta.env.BASE_URL;
 
 <BaseLayout title="首页">
   <section class="hero">
-    <div class="hero-inner">
-      <p class="hero-eyebrow">中英对照阅读 · 工作手册</p>
-      <h1 class="hero-title">前线部署工程师</h1>
-      <p class="hero-sub">
-        人工智能时代的客户价值交付秘籍。<br />
-        范冰著 · 免费公开全文 · 中英逐段对照阅读版，附一份可勾选的工作手册。
-      </p>
-      <div class="hero-cta">
-        <a class="btn btn-primary" href={`${base}chapters/chapter-1-rise-of-fde/`}>
-          开始阅读
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-        <a class="btn btn-ghost" href={`${base}handbook/`}>查看工作手册</a>
-      </div>
-      <div class="hero-stats">
-        <div class="stat">
-          <span class="stat-num">12</span>
-          <span class="stat-label">章节</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">120</span>
-          <span class="stat-label">真实案例</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">6</span>
-          <span class="stat-label">交付阶段</span>
-        </div>
-      </div>
+    <h1 class="hero-title">前线部署工程师</h1>
+    <p>人工智能时代的客户价值交付秘籍。</p>
+    <p>范冰著 · 免费公开全文 · 中英逐段对照阅读版，附一份可勾选的工作手册。</p>
+    <div class="hero-cta">
+      <a href={`${base}chapters/chapter-1-rise-of-fde/`}>开始阅读 →</a>
+      <a href={`${base}handbook/`}>查看工作手册</a>
     </div>
   </section>
 
-  <section class="chapter-list">
-    <h2 class="section-title">章节目录</h2>
-    <ol class="toc">
-      {
-        chapters.map((slug, i) => (
-          <li>
-            <a href={`${base}chapters/${slug}/`}>
-              <span class="toc-num">{String(i + 1).padStart(2, '0')}</span>
-              <span class="toc-title">{titles[slug]}</span>
-              <svg class="toc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-            </a>
-          </li>
-        ))
-      }
-    </ol>
+  <section class="stats">
+    <div class="stat"><span class="n">12</span><span class="l">章节</span></div>
+    <div class="stat"><span class="n">120</span><span class="l">真实案例</span></div>
+    <div class="stat"><span class="n">6</span><span class="l">交付阶段</span></div>
   </section>
 
-  <section class="features">
+  <section>
+    <h2 class="section-title">章节目录</h2>
+    <div class="cards">
+      {
+        chapters.map((slug, i) => (
+          <a class="card" href={`${base}chapters/${slug}/`}>
+            <span class="card-num">{String(i + 1).padStart(2, '0')}</span>
+            <span class="card-title">{titles[slug]}</span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <section>
     <h2 class="section-title">本站提供</h2>
-    <div class="feature-grid">
-      <a class="feature" href={`${base}chapters/chapter-1-rise-of-fde/`}>
-        <div class="feature-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4h6a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H2z"/><path d="M22 4h-6a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h7z"/></svg>
-        </div>
+    <div class="cards">
+      <a class="card feature" href={`${base}chapters/chapter-1-rise-of-fde/`}>
         <h3>中英对照原文</h3>
-        <p>逐段并排，中文在左、英文在右，移动端自动堆叠。精读和术语对照都方便。</p>
+        <p class="zh">逐段并排，中文在左、英文在右，移动端自动堆叠。精读和术语对照都方便。</p>
       </a>
-      <a class="feature" href={`${base}handbook/`}>
-        <div class="feature-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-        </div>
+      <a class="card feature" href={`${base}handbook/`}>
         <h3>可执行工作手册</h3>
-        <p>全书方法论整理成按交付旅程排的检查清单，每项带阈值与高危信号。</p>
+        <p class="zh">全书方法论整理成按交付旅程排的检查清单，每项带阈值与高危信号。</p>
       </a>
-      <a class="feature" href={`${base}metrics/`}>
-        <div class="feature-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>
-        </div>
+      <a class="card feature" href={`${base}metrics/`}>
         <h3>指标速查</h3>
-        <p>FDE 全流程指标一页纸：TTV、NRR、毛利率、转化率，每项附参考线与警戒线。</p>
+        <p class="zh">FDE 全流程指标一页纸：TTV、NRR、毛利率、转化率，每项附参考线与警戒线。</p>
       </a>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .hero {
-    border-bottom: 1px solid var(--border);
-    position: relative;
-    overflow: hidden;
-    background:
-      radial-gradient(48rem 22rem at 50% -6rem, var(--c-accent-soft) 0%, transparent 68%),
-      linear-gradient(180deg, var(--bg-sidebar) 0%, var(--bg) 100%);
-  }
-  :root[data-theme='dark'] .hero {
-    background:
-      radial-gradient(48rem 22rem at 50% -6rem, var(--c-accent-soft) 0%, transparent 68%),
-      linear-gradient(180deg, var(--bg-sidebar) 0%, var(--bg) 100%);
-  }
-  /* 细网格纹理，营造纸面排版感 */
-  .hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(var(--border) 1px, transparent 1px),
-      linear-gradient(90deg, var(--border) 1px, transparent 1px);
-    background-size: 3rem 3rem;
-    opacity: 0.35;
-    mask-image: linear-gradient(180deg, rgba(0,0,0,0.5), transparent 70%);
-    -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0.5), transparent 70%);
-    pointer-events: none;
-  }
-  .hero-inner {
-    position: relative;
-    max-width: 46rem;
-    margin: 0 auto;
-    padding: clamp(3rem, 9vw, 5.5rem) 1.5rem clamp(2.5rem, 7vw, 4rem);
-    text-align: center;
-  }
-  .hero-eyebrow {
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.22em;
-    color: var(--c-accent);
-    font-weight: 600;
-    margin: 0 0 1.1rem;
-  }
+  .hero { padding: 1.5rem 0 0.5rem; border-bottom: 1px solid var(--border-soft); margin-bottom: 1.2rem; }
   .hero-title {
-    font-size: clamp(2.6rem, 1.6rem + 4.5vw, 4.4rem);
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    margin: 0 0 1.4rem;
+    font-size: 2.6rem;
+    font-weight: 400;
+    margin: 0 0 0.6rem;
+    color: var(--text-strong);
     line-height: 1.15;
-    text-wrap: balance;
-  }
-  .hero-sub {
-    font-size: clamp(0.98rem, 0.9rem + 0.5vw, 1.15rem);
-    color: var(--text-soft);
-    margin: 0 auto 2.2rem;
-    line-height: 1.85;
-    max-width: 34rem;
-  }
-  .hero-cta {
-    display: flex;
-    gap: 0.8rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 2.8rem;
-  }
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    padding: 0.72rem 1.55rem;
-    border-radius: 999px;
-    font-weight: 600;
-    font-size: 0.94rem;
-    transition: transform 0.15s, box-shadow 0.15s, background 0.15s, border-color 0.15s;
-  }
-  .btn:hover { text-decoration: none; transform: translateY(-1px); }
-  .btn-primary {
-    background: var(--c-accent);
-    color: #fff;
-    box-shadow: 0 4px 14px color-mix(in srgb, var(--c-accent) 30%, transparent);
-  }
-  .btn-primary:hover { background: var(--c-accent-deep); box-shadow: 0 6px 18px color-mix(in srgb, var(--c-accent) 35%, transparent); }
-  .btn-ghost {
-    background: transparent;
-    color: var(--text);
-    border: 1px solid var(--border-strong);
-  }
-  .btn-ghost:hover { background: var(--bg-sidebar); border-color: var(--text-soft); }
-  .hero-stats {
-    display: flex;
-    gap: clamp(1.5rem, 6vw, 3.5rem);
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .stat { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; }
-  .stat-num {
-    font-family: var(--font-serif);
-    font-size: 2.1rem;
-    font-weight: 700;
-    color: var(--c-accent);
-    line-height: 1;
-    font-variant-numeric: tabular-nums;
-  }
-  .stat-label {
-    font-size: 0.78rem;
-    color: var(--text-soft);
-    letter-spacing: 0.08em;
-  }
-
-  .chapter-list, .features {
-    max-width: 50rem;
-    margin: 0 auto;
-    padding: clamp(2.25rem, 5.5vw, 3.75rem) 1.5rem;
-  }
-  .section-title {
-    font-size: 1.45rem;
-    font-weight: 700;
-    margin: 0 0 1.5rem;
     letter-spacing: 0.01em;
   }
-  .toc {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr));
-    gap: 0.6rem;
-  }
-  .toc li a {
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
-    padding: 0.85rem 1rem;
+  .hero p { color: var(--text-soft); margin: 0.25rem 0; font-size: 1.05rem; }
+  .hero-cta { margin-top: 1.2rem; display: flex; gap: 1.4rem; flex-wrap: wrap; }
+  .hero-cta a {
     border: 1px solid var(--border);
-    border-radius: var(--radius);
     background: var(--bg);
+    border-radius: 2px;
+    padding: 0.3rem 1.1rem;
+    font-size: 0.95rem;
     color: var(--text);
-    height: 100%;
-    transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
   }
-  .toc li a:hover {
-    background: var(--bg-sidebar);
-    border-color: var(--border-strong);
-    box-shadow: var(--shadow-md);
-    transform: translateY(-1px);
-    text-decoration: none;
-  }
-  .toc-num {
-    font-family: var(--font-mono);
-    font-size: 0.74rem;
-    color: var(--text-soft);
-    font-variant-numeric: tabular-nums;
-    min-width: 1.6rem;
-    padding: 0.18rem 0;
-    border-bottom: 1px solid var(--border-strong);
-    text-align: center;
-  }
-  .toc-title { flex: 1; font-weight: 500; font-size: 0.92rem; }
-  .toc-arrow { color: var(--text-soft); opacity: 0; transition: opacity 0.15s, transform 0.15s; }
-  .toc li a:hover .toc-arrow { opacity: 1; transform: translateX(3px); }
+  .hero-cta a:hover { border-color: var(--c-accent); color: var(--c-accent); text-decoration: none; }
 
-  .feature-grid {
+  .stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1px;
+    background: var(--border-soft);
+    border: 1px solid var(--border-soft);
+    margin: 1.2rem 0;
   }
-  .feature {
-    display: block;
-    padding: 1.6rem 1.5rem;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    background: var(--bg);
-    color: inherit;
-    transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
-  }
-  .feature:hover {
-    text-decoration: none;
-    border-color: var(--border-strong);
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-2px);
-  }
-  .feature-icon {
-    width: 2.6rem; height: 2.6rem;
-    display: flex; align-items: center; justify-content: center;
-    border-radius: 10px;
-    background: var(--c-accent-soft);
-    color: var(--c-accent);
-    margin-bottom: 0.9rem;
-  }
-  .feature h3 {
-    margin: 0 0 0.45rem;
-    font-size: 1.05rem;
-    font-weight: 700;
-  }
-  .feature p {
-    margin: 0;
-    font-size: 0.875rem;
+  .stat { background: var(--bg); padding: 1.1rem 1.2rem; }
+  .stat .n { font-size: 2rem; line-height: 1.1; color: var(--text-strong); font-variant-numeric: oldstyle-nums; }
+  .stat .l { font-size: 0.82rem; color: var(--text-soft); margin-top: 0.2rem; }
+
+  .section-title {
+    font-size: 1.15rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
     color: var(--text-soft);
-    line-height: 1.7;
+    margin: 2.8rem 0 1.2rem;
+    border-bottom: 1px solid var(--border-soft);
+    padding-bottom: 0.5rem;
   }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1px;
+    background: var(--border-soft);
+    border: 1px solid var(--border-soft);
+  }
+  .card {
+    background: var(--bg);
+    padding: 1.1rem 1.3rem;
+    display: block;
+    color: var(--text);
+  }
+  .card:hover { background: var(--bg-sidebar); text-decoration: none; }
+  .card-num {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-soft);
+    margin-right: 0.7rem;
+  }
+  .card-title { font-size: 1.02rem; color: var(--text-strong); }
+  .feature h3 { margin: 0 0 0.2rem; font-size: 1.05rem; font-weight: 400; color: var(--text-strong); }
+  .feature .zh { color: var(--text-soft); font-size: 0.92rem; margin: 0; }
 </style>

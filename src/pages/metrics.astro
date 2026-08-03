@@ -108,67 +108,64 @@ const metrics = [
 </BaseLayout>
 
 <style>
-  .metrics-page { max-width: 58rem; }
-  .page-head { margin-bottom: 2.25rem; }
+  .metrics-page { max-width: 52rem; }
+  .page-head { margin-bottom: 2rem; }
   .eyebrow {
-    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.16em;
-    color: var(--c-accent); font-weight: 700; margin: 0 0 0.6rem;
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--text-soft); margin: 0 0 0.5rem;
   }
   .page-head h1 {
-    font-family: var(--font-serif);
-    font-size: clamp(1.9rem, 1.3rem + 2vw, 2.6rem);
-    font-weight: 700; margin: 0 0 0.85rem; letter-spacing: 0.01em;
+    font-size: 1.8rem;
+    font-weight: 400; margin: 0 0 0.3rem;
+    color: var(--text-strong);
   }
   .page-head .lead {
-    font-size: 0.95rem; color: var(--text-soft);
-    line-height: 1.85; margin: 0; max-width: 46rem;
+    font-size: 1rem; color: var(--text-soft);
+    line-height: 1.75; margin: 0.5rem 0 0; max-width: 46rem;
   }
-  .metric-layers { display: flex; flex-direction: column; gap: 2.75rem; }
+  .metric-layers { display: flex; flex-direction: column; gap: 2.5rem; }
   .layer-head {
     display: flex; align-items: baseline; gap: 0.85rem;
     margin-bottom: 0.85rem; flex-wrap: wrap;
   }
   .layer-head h2 {
-    font-family: var(--font-serif);
-    font-size: 1.3rem; font-weight: 700; margin: 0;
-    color: var(--c-accent);
+    font-size: 1.3rem; font-weight: 400; margin: 0;
+    color: var(--text-strong);
   }
-  .layer-desc { font-size: 0.85rem; color: var(--text-soft); }
+  .layer-desc { font-size: 0.88rem; color: var(--text-soft); }
   .metric-table-wrap {
     overflow-x: auto;
     border: 1px solid var(--border);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-sm);
   }
   table {
-    width: 100%; border-collapse: collapse; font-size: 0.875rem;
+    width: 100%; border-collapse: collapse; font-size: 0.9rem;
     min-width: 36rem;
   }
   th, td {
-    padding: 0.65rem 0.9rem; text-align: left;
-    border-bottom: 1px solid var(--border);
+    padding: 0.55rem 0.8rem; text-align: left;
+    border-bottom: 1px solid var(--border-soft);
     vertical-align: top;
   }
   th {
-    background: var(--bg-sidebar); font-weight: 700;
-    font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.06em;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
     color: var(--text-soft);
+    font-weight: 400;
   }
   tbody tr:last-child td { border-bottom: none; }
-  tbody tr:hover { background: var(--bg-sidebar); }
-  .metric-name { font-weight: 600; white-space: nowrap; }
-  .metric-good { color: var(--c-accent); font-weight: 600; }
-  .metric-note { color: var(--text-soft); font-size: 0.82rem; }
+  tbody tr:hover td { background: var(--bg-sidebar); }
+  .metric-name { color: var(--text-strong); }
+  .metric-good { color: var(--c-accent); }
+  .metric-note { color: var(--text-soft); font-size: 0.85rem; }
   .usage-tips {
-    margin-top: 3rem; padding: 1.6rem 1.9rem;
-    background: var(--bg-sidebar); border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
+    margin-top: 3rem; padding: 1.2rem 1.4rem;
+    border-top: 3px solid var(--text-strong);
   }
   .usage-tips h2 {
-    font-family: var(--font-serif);
-    font-size: 1.15rem; font-weight: 700; margin: 0 0 0.8rem;
-    color: var(--c-accent);
+    font-size: 1.15rem; font-weight: 400; margin: 0 0 0.8rem;
+    color: var(--text-strong);
   }
-  .usage-tips ol { margin: 0; padding-left: 1.5rem; }
-  .usage-tips li { margin: 0.45rem 0; font-size: 0.875rem; line-height: 1.7; }
+  .usage-tips ol { margin: 0; padding-left: 1.4rem; }
+  .usage-tips li { margin: 0.4rem 0; font-size: 0.95rem; line-height: 1.7; }
 </style>

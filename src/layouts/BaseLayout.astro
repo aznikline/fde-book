@@ -32,24 +32,24 @@ const themeScript = `
     <meta name="description" content={description} />
     <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
     <title>{fullTitle}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Benne&display=swap" rel="stylesheet" />
     <script is:inline set:html={themeScript} />
   </head>
   <body data-theme-scope>
-    <header class="topbar">
-      <div class="topbar-inner">
-        <a href={base} class="brand">
-          <span class="brand-mark">FDE</span>
-          <span class="brand-name">前线部署工程师</span>
-        </a>
-        <nav class="topnav">
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href={base}>前线部署工程师<small>FDE · 中英对照阅读</small></a>
+        <nav class="nav">
           <a href={base} class:list={[{ active: !activeSlug }]}>首页</a>
           <a href={`${base}chapters/chapter-1-rise-of-fde/`} class:list={[{ active: activeSlug === 'chapter-1-rise-of-fde' }]}>原文</a>
           <a href={`${base}handbook/`} class:list={[{ active: activeSlug === 'handbook' }]}>工作手册</a>
           <a href={`${base}metrics/`} class:list={[{ active: activeSlug === 'metrics' }]}>指标速查</a>
         </nav>
         <button class="theme-toggle" id="theme-toggle" aria-label="切换主题" title="切换深浅色">
-          <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-          <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>
       </div>
     </header>
@@ -93,8 +93,8 @@ const themeScript = `
 
     <footer class="site-footer">
       <div class="footer-inner">
-        <span class="footer-brand">《前线部署工程师》中英对照阅读站</span>
-        <span class="footer-quote">知识的价值在于流动</span>
+        <span>《前线部署工程师》中英对照阅读站 · 基于范冰原著</span>
+        <span>知识的价值在于流动</span>
       </div>
     </footer>
 
@@ -118,194 +118,170 @@ const themeScript = `
 </html>
 
 <style is:global>
+  /* 视觉风格对齐参考站（situational-awareness）：Benne 衬线 / 白底 /
+     深灰正文 / 紫色链接 / 细边框 / 大留白 / 无圆角无阴影 */
   :root {
-    /* 主色：沉稳靛蓝，避免模板感的亮蓝 */
-    --c-accent: #2f55c4;
-    --c-accent-deep: #1e3a8a;
-    --c-accent-soft: #eef1fa;
-    /* 警示/高危标记色（琥珀，非 emoji，纯排版色） */
-    --c-warn: #a16207;
-    /* 纸感底色：暖白 */
-    --bg: #fbfaf7;
-    --bg-sidebar: #f4f2ec;
-    --bg-topbar: rgba(251, 250, 247, 0.86);
-    --bg-code: #f0eee7;
-    --text: #23211c;
-    --text-soft: #6f6a5e;
-    --border: #e6e2d6;
-    --border-strong: #d6d1c2;
-    --shadow-sm: 0 1px 2px rgba(35, 33, 28, 0.05);
-    --shadow-md: 0 3px 10px rgba(35, 33, 28, 0.07);
-    --shadow-lg: 0 14px 36px rgba(35, 33, 28, 0.11);
-    --radius-sm: 6px;
-    --radius: 10px;
-    --radius-lg: 14px;
-    /* 字体：标题走衬线（书卷气），正文无衬线保证可读性 */
-    --font-serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia,
-      'Songti SC', 'Noto Serif SC', 'Source Han Serif SC', 'STSong', serif;
-    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
-      'Hiragino Sans GB', 'Noto Sans CJK SC', 'Source Han Sans SC',
-      'Microsoft YaHei', Roboto, Helvetica, Arial, sans-serif;
-    --font-mono: ui-monospace, 'SF Mono', 'JetBrains Mono', Consolas,
-      'Liberation Mono', monospace;
+    --c-accent: #7a00df;
+    --c-accent-deep: #54009e;
+    --c-accent-soft: #f5edfd;
+    --c-warn: #8a5a00;
+    --bg: #ffffff;
+    --bg-sidebar: #faf9f7;
+    --bg-topbar: #ffffff;
+    --bg-code: #f5f4f1;
+    --text: #383838;
+    --text-strong: #0c0707;
+    --text-soft: #6d6d6d;
+    --border: #ddd;
+    --border-soft: #eee;
+    --shadow-sm: none;
+    --shadow-md: none;
+    --shadow-lg: none;
+    --radius-sm: 2px;
+    --radius: 2px;
+    --radius-lg: 2px;
+    --font-serif: 'Benne', Georgia, 'Times New Roman', 'Songti SC', 'SimSun', serif;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC',
+      'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   }
   :root[data-theme='dark'] {
-    --c-accent: #7d9be8;
-    --c-accent-deep: #aebff2;
-    --c-accent-soft: #1c2436;
+    --c-accent: #b07ae6;
+    --c-accent-deep: #c79cf0;
+    --c-accent-soft: #241a30;
     --c-warn: #d9a441;
-    --bg: #16150f;
-    --bg-sidebar: #1c1b15;
-    --bg-topbar: rgba(22, 21, 15, 0.86);
-    --bg-code: #211f19;
-    --text: #e9e6de;
-    --text-soft: #9d988a;
-    --border: #2d2b23;
-    --border-strong: #3d3a30;
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 3px 10px rgba(0, 0, 0, 0.35);
-    --shadow-lg: 0 14px 36px rgba(0, 0, 0, 0.45);
+    --bg: #101010;
+    --bg-sidebar: #161616;
+    --bg-topbar: #101010;
+    --bg-code: #1b1b1b;
+    --text: #c9c9c9;
+    --text-strong: #f0f0f0;
+    --text-soft: #8a8a8a;
+    --border: #333;
+    --border-soft: #2a2a2a;
   }
   :root:not([data-theme='dark']) { color-scheme: light; }
   :root[data-theme='dark'] { color-scheme: dark; }
-  html { scroll-behavior: smooth; }
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
     margin: 0;
-    font-family: var(--font-sans);
+    font-family: var(--font-serif);
     background: var(--bg);
     color: var(--text);
-    font-size: 16px;
-    line-height: 1.7;
+    font-size: 17px;
+    line-height: 1.75;
+    font-variant-numeric: oldstyle-nums;
     -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-  }
-  h1, h2, h3, h4, .serif {
-    font-family: var(--font-serif);
-    letter-spacing: 0.01em;
   }
   a { color: var(--c-accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  ::selection { background: var(--c-accent); color: var(--bg); }
+  a:hover { color: var(--c-accent-deep); text-decoration: underline; text-underline-offset: 3px; }
+  ::selection { background: var(--c-accent); color: #fff; }
   ::-webkit-scrollbar { width: 10px; height: 10px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 5px; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 5px; }
   ::-webkit-scrollbar-thumb:hover { background: var(--text-soft); }
 
-  /* 顶栏 */
-  .topbar {
-    position: sticky; top: 0; z-index: 50;
-    background: var(--bg-topbar);
-    backdrop-filter: saturate(180%) blur(14px);
-    -webkit-backdrop-filter: saturate(180%) blur(14px);
+  /* 顶栏（参考站 site-header） */
+  .site-header {
     border-bottom: 1px solid var(--border);
+    background: var(--bg);
   }
-  .topbar-inner {
-    max-width: 100rem; margin: 0 auto;
-    height: 3.75rem;
-    display: flex; align-items: center; gap: 1.25rem;
-    padding: 0 1.5rem;
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.1rem 1.5rem 0.9rem;
+    display: flex;
+    align-items: baseline;
+    gap: 2rem;
+    flex-wrap: wrap;
   }
-  .brand { display: flex; align-items: center; gap: 0.65rem; color: var(--text); }
+  .brand {
+    font-weight: 400;
+    font-size: 1.15rem;
+    letter-spacing: 0.02em;
+    color: var(--text-strong);
+  }
   .brand:hover { text-decoration: none; }
-  .brand-mark {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 2rem; height: 2rem;
-    background: linear-gradient(135deg, var(--c-accent) 0%, var(--c-accent-deep) 100%);
-    color: var(--bg);
-    border-radius: 8px;
-    font-family: var(--font-serif);
-    font-size: 0.78rem; font-weight: 700;
-    letter-spacing: 0.06em;
-    box-shadow: var(--shadow-sm);
-  }
-  .brand-name {
-    font-family: var(--font-serif);
-    font-size: 1.02rem; font-weight: 700; letter-spacing: 0.04em;
-  }
-  .topnav { display: flex; gap: 0.25rem; margin-left: 0.5rem; }
-  .topnav a {
-    padding: 0.42rem 0.85rem; border-radius: var(--radius-sm);
-    font-size: 0.875rem; color: var(--text-soft); font-weight: 500;
-    transition: color 0.15s, background 0.15s;
-  }
-  .topnav a:hover { background: var(--bg-sidebar); color: var(--text); text-decoration: none; }
-  .topnav a.active { color: var(--c-accent); background: var(--c-accent-soft); font-weight: 600; }
+  .brand small { color: var(--text-soft); font-size: 0.78rem; margin-left: 0.6rem; }
+  .nav { display: flex; gap: 1.4rem; flex-wrap: wrap; }
+  .nav a { color: var(--text); font-size: 0.95rem; }
+  .nav a:hover { color: var(--c-accent); text-decoration: none; }
+  .nav a.active { color: var(--c-accent); }
   .theme-toggle {
     margin-left: auto;
-    background: none; border: 1px solid var(--border); cursor: pointer;
-    width: 2.25rem; height: 2.25rem; border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--bg);
+    border-radius: 2px;
+    padding: 0.15rem 0.65rem;
+    cursor: pointer;
+    color: var(--text);
     display: flex; align-items: center; justify-content: center;
-    color: var(--text-soft);
-    transition: border-color 0.15s, color 0.15s, background 0.15s;
   }
-  .theme-toggle:hover { background: var(--bg-sidebar); color: var(--text); border-color: var(--border-strong); }
+  .theme-toggle:hover { border-color: var(--c-accent); color: var(--c-accent); }
   :root:not([data-theme='dark']) .icon-moon { display: block; }
   :root:not([data-theme='dark']) .icon-sun { display: none; }
   :root[data-theme='dark'] .icon-moon { display: none; }
   :root[data-theme='dark'] .icon-sun { display: block; }
 
-  /* 主布局 */
+  /* 主布局：侧栏 + 正文 */
   .layout {
     display: grid;
-    grid-template-columns: 16.5rem minmax(0, 1fr);
-    max-width: 100rem; margin: 0 auto;
-    min-height: calc(100vh - 3.75rem);
+    grid-template-columns: 15rem minmax(0, 1fr);
+    max-width: 1100px; margin: 0 auto;
+    min-height: calc(100vh - 4.5rem);
   }
   .sidebar {
-    border-right: 1px solid var(--border);
-    padding: 1.75rem 0.75rem 2rem;
-    position: sticky; top: 3.75rem;
-    height: calc(100vh - 3.75rem);
+    border-right: 1px solid var(--border-soft);
+    padding: 1.5rem 0.75rem 2rem;
+    position: sticky; top: 0;
+    height: calc(100vh);
     overflow-y: auto;
     background: var(--bg-sidebar);
+    font-size: 0.92rem;
   }
   .sidebar-group-label {
-    font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.1em;
-    color: var(--text-soft); margin: 1.5rem 0.75rem 0.45rem; font-weight: 700;
-    opacity: 0.85;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-soft);
+    margin: 1.5rem 0.75rem 0.45rem;
+    font-weight: 400;
   }
   .sidebar-group { list-style: none; padding: 0; margin: 0 0 0.5rem; }
   .sidebar-group li a {
     display: flex; align-items: baseline; gap: 0.5rem;
-    padding: 0.32rem 0.65rem; border-radius: var(--radius-sm);
-    color: var(--text-soft); font-size: 0.83rem; line-height: 1.45;
-    transition: background 0.12s, color 0.12s;
+    padding: 0.28rem 0.65rem; border-radius: 2px;
+    color: var(--text); font-size: 0.88rem; line-height: 1.5;
   }
-  .sidebar-group li a:hover { background: var(--border); text-decoration: none; color: var(--text); }
-  .sidebar-group li a.active {
-    background: var(--c-accent-soft); color: var(--c-accent); font-weight: 600;
-    box-shadow: inset 2.5px 0 0 var(--c-accent);
-  }
-  .ch-num { font-size: 0.68rem; color: var(--text-soft); font-variant-numeric: tabular-nums; opacity: 0.75; min-width: 1.3rem; font-family: var(--font-mono); }
-  .sidebar-group li a.active .ch-num { color: var(--c-accent); opacity: 1; }
-  .main { padding: 2.25rem clamp(1.25rem, 3.5vw, 3rem) 4.5rem; min-width: 0; }
+  .sidebar-group li a:hover { background: var(--border-soft); text-decoration: none; color: var(--text-strong); }
+  .sidebar-group li a.active { color: var(--c-accent); }
+  .ch-num { font-size: 0.72rem; color: var(--text-soft); font-variant-numeric: tabular-nums; min-width: 1.3rem; font-family: var(--font-mono); }
+  .sidebar-group li a.active .ch-num { color: var(--c-accent); }
+  .main { padding: 2.5rem clamp(1.25rem, 3vw, 2rem) 4rem; min-width: 0; }
 
-  /* 页脚 */
-  .site-footer { border-top: 1px solid var(--border); background: var(--bg-sidebar); }
-  .footer-inner {
-    max-width: 100rem; margin: 0 auto;
-    padding: 1.4rem 1.5rem; display: flex; justify-content: space-between;
-    align-items: baseline; gap: 0.75rem; flex-wrap: wrap;
+  /* 页脚（参考站 footer） */
+  .site-footer {
+    max-width: 1100px; margin: 0 auto;
+    padding: 1.5rem 1.5rem 2.5rem;
+    border-top: 1px solid var(--border);
+    color: var(--text-soft);
+    font-size: 0.85rem;
   }
-  .footer-brand { font-size: 0.8rem; color: var(--text-soft); }
-  .footer-quote {
-    font-family: var(--font-serif);
-    font-style: italic; font-size: 0.82rem; color: var(--text-soft);
-    opacity: 0.9;
+  .footer-inner {
+    display: flex; justify-content: space-between;
+    align-items: baseline; gap: 0.75rem; flex-wrap: wrap;
   }
 
   @media (max-width: 880px) {
     .layout { grid-template-columns: 1fr; }
     .sidebar {
       position: relative; top: auto; height: auto;
-      border-right: none; border-bottom: 1px solid var(--border);
+      border-right: none; border-bottom: 1px solid var(--border-soft);
       padding: 0.75rem 1.25rem 1rem;
     }
     .sidebar-group { display: flex; flex-wrap: wrap; gap: 0.25rem; }
-    .sidebar-group li a { padding: 0.28rem 0.6rem; }
-    .sidebar-group li a.active { box-shadow: none; }
-    .topnav { display: none; }
-    .brand-name { font-size: 0.92rem; }
+    .nav { display: none; }
+    .brand small { display: none; }
   }
 </style>

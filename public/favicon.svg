@@ -1,10 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#2f55c4"/>
-      <stop offset="1" stop-color="#1e3a8a"/>
-    </linearGradient>
-  </defs>
-  <rect width="32" height="32" rx="8" fill="url(#g)"/>
-  <text x="16" y="21.5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#fff" font-family="Georgia, 'Songti SC', serif" letter-spacing="0.5">FDE</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" fill="#0c0707"/><text x="32" y="42" font-family="Georgia, serif" font-size="30" fill="#ffffff" text-anchor="middle">FDE</text></svg>
