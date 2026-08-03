@@ -32,6 +32,19 @@ const title = titles[slug] ?? zhEntry.data.title;
 const hasEn = !!enEntry;
 const zhHtml = await renderMarkdown(zhBody);
 
+// 从中文正文提取二级标题，生成页内小节目录（锚点跳到中文列的 h2 id）
+const sectionToc = [...zhBody.matchAll(/^##\s+(.+)$/gm)].map((m) => {
+  const text = m[1].trim();
+  // 与 rehype-slug 生成规则一致：小写、空格转横线、去标点
+  const id = text
+    .toLowerCase()
+    .replace(/[^\w\s一-鿿-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+  return { id, text };
+});
+
 const idx = chapters.indexOf(slug);
 const prev = idx > 0 ? { slug: chapters[idx - 1], title: titles[chapters[idx - 1]] } : null;
 const next =
@@ -48,6 +61,19 @@ const next =
         {hasEn ? '中英对照 · Bilingual' : '仅中文 · 译文待补'}
       </div>
     </header>
+
+    {
+      sectionToc.length > 0 && (
+        <details class="section-toc" open>
+          <summary>本章小节（{sectionToc.length}）</summary>
+          <ol>
+            {sectionToc.map((s) => (
+              <li><a href={`#${s.id}`}>{s.text}</a></li>
+            ))}
+          </ol>
+        </details>
+      )
+    }
 
     {
       hasEn ? (
@@ -71,6 +97,29 @@ const next =
     gap: 1rem;
     flex-wrap: wrap;
   }
+  .section-toc {
+    margin: 0 0 2rem;
+    padding: 0.75rem 1rem 0.85rem;
+    background: var(--bg-sidebar);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .section-toc summary {
+    cursor: pointer; font-weight: 600; font-size: 0.875rem;
+    color: var(--text-soft);
+    list-style: none;
+  }
+  .section-toc summary::-webkit-details-marker { display: none; }
+  .section-toc summary::before { content: '▸ '; color: var(--c-accent); }
+  .section-toc[open] summary::before { content: '▾ '; }
+  .section-toc ol {
+    margin: 0.6rem 0 0; padding-left: 1.25rem;
+    columns: 2; column-gap: 1.5rem;
+  }
+  .section-toc li { margin: 0.2rem 0; break-inside: avoid; }
+  .section-toc a { font-size: 0.82rem; color: var(--text); }
+  .section-toc a:hover { color: var(--c-accent); }
+  @media (max-width: 640px) { .section-toc ol { columns: 1; } }
   .chapter-head h1 {
     margin: 0;
     font-size: clamp(1.5rem, 1rem + 2vw, 2.25rem);
