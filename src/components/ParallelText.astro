@@ -1,0 +1,154 @@
+---
+import { parseToBlocks, pairBlocks } from '../lib/parallel';
+
+interface Props {
+  zh: string; // 中文 markdown 原文
+  en: string; // 英文 markdown 译文
+}
+
+const { zh, en } = Astro.props;
+
+const zhBlocks = await parseToBlocks(zh);
+const enBlocks = await parseToBlocks(en);
+const pairs = pairBlocks(zhBlocks, enBlocks);
+---
+
+<div class="parallel">
+  {
+    pairs.map((p, i) => (
+      <div class={`pair${p.aligned ? '' : ' pair--unaligned'}`} data-index={i}>
+        <div class="pair__zh" set:html={p.zh ?? '<p class="missing">（中文缺）</p>'} />
+        <div class="pair__en" set:html={p.en ?? '<p class="missing">（English missing）</p>'} />
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .parallel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+    border-bottom: 1px solid var(--sl-color-gray-7, #e5e5e5);
+    padding-bottom: 1.25rem;
+  }
+  .pair:last-child {
+    border-bottom: none;
+  }
+  /* 未对齐块加警示边框，方便译者自查 */
+  .pair--unaligned {
+    background: var(--sl-color-yellow-low-visibility, #fffbe6);
+    box-shadow: inset 3px 0 0 #d4a017;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+  }
+  .pair__zh,
+  .pair__en {
+    /* 继承 Starlight 文章排版样式 */
+    font-size: var(--sl-text-body, 1rem);
+    line-height: 1.7;
+    overflow-wrap: break-word;
+  }
+  .pair__zh :global(h1),
+  .pair__en :global(h1) {
+    font-size: 1.5rem;
+    margin: 0 0 0.75rem;
+  }
+  .pair__zh :global(h2),
+  .pair__en :global(h2) {
+    font-size: 1.25rem;
+    margin: 1.25rem 0 0.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--sl-color-gray-7, #e5e5e5);
+  }
+  .pair__zh :global(h3),
+  .pair__en :global(h3) {
+    font-size: 1.1rem;
+    margin: 1rem 0 0.4rem;
+  }
+  .pair__zh :global(p),
+  .pair__en :global(p) {
+    margin: 0 0 0.6rem;
+  }
+  .pair__zh :global(p:last-child),
+  .pair__en :global(p:last-child) {
+    margin-bottom: 0;
+  }
+  .pair__zh :global(blockquote),
+  .pair__en :global(blockquote) {
+    border-left: 3px solid var(--sl-color-accent, #6cb6ff);
+    padding: 0.25rem 0.75rem;
+    margin: 0 0 0.6rem;
+    color: var(--sl-color-gray-2, #555);
+    font-style: italic;
+  }
+  .pair__zh :global(ul),
+  .pair__zh :global(ol),
+  .pair__en :global(ul),
+  .pair__en :global(ol) {
+    margin: 0 0 0.6rem;
+    padding-left: 1.5rem;
+  }
+  .pair__zh :global(li),
+  .pair__en :global(li) {
+    margin: 0.2rem 0;
+  }
+  .pair__zh :global(code),
+  .pair__en :global(code) {
+    font-family: var(--sl-font-mono, monospace);
+    font-size: 0.875em;
+    background: var(--sl-color-gray-7, #f5f5f5);
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+  }
+  .pair__zh :global(a),
+  .pair__en :global(a) {
+    color: var(--sl-color-accent, #6cb6ff);
+    text-decoration: none;
+  }
+  .pair__zh :global(a:hover),
+  .pair__en :global(a:hover) {
+    text-decoration: underline;
+  }
+  .pair__zh :global(strong),
+  .pair__en :global(strong) {
+    font-weight: 700;
+  }
+  .pair__en :global(.missing),
+  .pair__zh :global(.missing) {
+    color: var(--sl-color-red, #d33);
+    font-style: italic;
+    opacity: 0.7;
+  }
+  /* 中文段落比英文略小，因为中文信息密度高、字形宽；保持两列视觉平衡 */
+  .pair__zh {
+    font-size: 0.95rem;
+    line-height: 1.75;
+  }
+  .pair__en {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  /* 移动端：堆叠为上下，中文在上英文在下 */
+  @media (max-width: 880px) {
+    .pair {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+    .pair__zh {
+      font-size: 1rem;
+      border-bottom: 1px dashed var(--sl-color-gray-7, #e5e5e5);
+      padding-bottom: 0.5rem;
+    }
+    .pair__en {
+      padding-top: 0.25rem;
+    }
+  }
+</style>

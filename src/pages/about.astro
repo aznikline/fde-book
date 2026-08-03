@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="关于本站" activeSlug="about">
+  <article class="prose">
+    <h1>关于本站</h1>
+    <p class="lead">
+      这是《前线部署工程师：人工智能时代的客户价值交付秘籍》的中英对照阅读站与工作手册。
+    </p>
+
+    <h2>原书</h2>
+    <p>
+      原书由范冰（XDash）所著，开源公开于
+      <a href="https://github.com/xdash/FDE-the-Guidance-Book-of-Forward-Deployed-Engineer" target="_blank" rel="noopener">GitHub</a>。
+      它系统梳理了一个在 2025 年爆发的岗位——前线部署工程师（Forward Deployed Engineer，FDE）：
+      从角色定义、完整交付旅程到 120 个真实案例。
+    </p>
+
+    <h2>本站做了什么</h2>
+    <ul>
+      <li><strong>中英逐段对照</strong>：原文与英文翻译按段落并排呈现，便于精读与术语对照。移动端自动堆叠为上下。</li>
+      <li><strong>可执行工作手册</strong>：把全书方法论提炼为按交付旅程组织的检查清单，每项带阈值与高危信号。</li>
+      <li><strong>指标速查</strong>：FDE 全链路指标一页纸，附参考标准与警戒线。</li>
+    </ul>
+
+    <h2>翻译说明</h2>
+    <p>
+      英文翻译为译者独立完成，力求信达雅与术语一致。翻译以段落为单位与原文严格对齐；
+      若某段两侧长度不一致，该段会以高亮标记，便于译者自查与读者核验。
+      翻译中保留部分专名原文（如 Palantir、OpenAI、Bootcamp），首次出现处给出中英对照。
+    </p>
+
+    <h2>版权</h2>
+    <p>
+      原书著作权归作者范冰所有，本站内容为非商业性学习用途的整理与翻译呈现。
+      如有疏漏或翻译问题，欢迎在
+      <a href="https://github.com/aznikline/fde-book" target="_blank" rel="noopener">仓库</a>
+      提 Issue 指正。
+    </p>
+
+    <blockquote>
+      「知识的价值在于流动，而不在于囤积。」
+    </blockquote>
+  </article>
+</BaseLayout>
+
+<style>
+  .prose { max-width: 44rem; }
+  .prose h1 { font-size: 2rem; font-weight: 800; margin: 0 0 1rem; letter-spacing: -0.01em; }
+  .prose .lead { font-size: 1.1rem; color: var(--text-soft); margin: 0 0 2rem; }
+  .prose h2 {
+    font-size: 1.25rem; font-weight: 700;
+    margin: 2rem 0 0.75rem; padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .prose p { margin: 0 0 1rem; line-height: 1.75; }
+  .prose ul { margin: 0 0 1rem; padding-left: 1.5rem; }
+  .prose li { margin: 0.4rem 0; line-height: 1.7; }
+  .prose blockquote {
+    border-left: 3px solid var(--c-accent);
+    padding: 0.75rem 1.25rem;
+    margin: 2rem 0 0;
+    color: var(--text-soft);
+    font-style: italic;
+    background: var(--bg-sidebar);
+    border-radius: 0 8px 8px 0;
+  }
+</style>

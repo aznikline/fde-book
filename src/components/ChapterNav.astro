@@ -1,0 +1,103 @@
+---
+// 上下章导航组件
+interface NavItem {
+  slug: string;
+  title: string;
+}
+interface Props {
+  prev: NavItem | null;
+  next: NavItem | null;
+  slug: string;
+}
+const { prev, next, slug } = Astro.props;
+---
+
+<nav class="chapter-nav" aria-label="章节导航">
+  {prev ? (
+    <a class="nav-card nav-card--prev" href={`/chapters/${prev.slug}/`}>
+      <span class="nav-label">← 上一章 / Previous</span>
+      <span class="nav-title">{prev.title}</span>
+    </a>
+  ) : (
+    <span class="nav-card nav-card--placeholder" />
+  )}
+  <a class="nav-card nav-card--handbook" href={`/handbook/`}>
+    <span class="nav-label">本章实操清单</span>
+    <span class="nav-title">→ 工作手册</span>
+  </a>
+  {next ? (
+    <a class="nav-card nav-card--next" href={`/chapters/${next.slug}/`}>
+      <span class="nav-label">下一章 / Next →</span>
+      <span class="nav-title">{next.title}</span>
+    </a>
+  ) : (
+    <span class="nav-card nav-card--placeholder" />
+  )}
+</nav>
+
+<style>
+  .chapter-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.75rem;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--sl-color-gray-7, #e5e5e5);
+  }
+  .nav-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--sl-color-gray-7, #e5e5e5);
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+  }
+  .nav-card:hover {
+    border-color: var(--c-accent, #6cb6ff);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+  .nav-card--prev {
+    text-align: left;
+  }
+  .nav-card--next {
+    text-align: right;
+    align-items: flex-end;
+  }
+  .nav-card--handbook {
+    text-align: center;
+    align-items: center;
+    background: var(--c-accent-soft, #f0f6ff);
+    border-color: var(--c-accent-soft, #d6e8ff);
+  }
+  .nav-card--placeholder {
+    visibility: hidden;
+  }
+  .nav-label {
+    font-size: 0.75rem;
+    color: var(--sl-color-gray-3, #888);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .nav-card--handbook .nav-label {
+    color: var(--c-accent-deep, #2563eb);
+  }
+  .nav-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  @media (max-width: 720px) {
+    .chapter-nav {
+      grid-template-columns: 1fr;
+    }
+    .nav-card--next {
+      text-align: left;
+      align-items: flex-start;
+    }
+    .nav-card--placeholder {
+      display: none;
+    }
+  }
+</style>

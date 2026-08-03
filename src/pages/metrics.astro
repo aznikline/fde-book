@@ -1,0 +1,170 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const metrics = [
+  {
+    layer: '交付层',
+    desc: '项目做得对不对',
+    items: [
+      { name: 'TTV 价值实现时间', pass: 'MVD 2–6 周', good: '完整 1–4 月', note: '持续变长 = 方法论或平台底座出问题的第一信号' },
+      { name: '概念验证转化率', pass: '—', good: '75%', note: '过低 = 筛选失职；过高(≈100%) = 只接没挑战的单' },
+      { name: '评估达标率', pass: '—', good: '生产时间序列稳定', note: '质量漂移的报警器' },
+      { name: '部署频次', pass: '周级', good: '日级高频小步', note: '回滚率低而稳定' },
+      { name: '缺陷逃逸率', pass: '—', good: '低', note: '测的是评估体系完备性，非工程师水平' },
+    ],
+  },
+  {
+    layer: '客户层',
+    desc: '客户活得怎么样',
+    items: [
+      { name: '激活率', pass: '—', good: '高位稳定', note: '分母是「目标用户群」非「账号数」' },
+      { name: '使用深度', pass: '—', good: '工作流嵌入 + 自助探索', note: '用户自己发现新用法 = 最珍贵信号' },
+      { name: '健康度评分', pass: '每周巡视', good: '四信号合成', note: '使用/价值/关系/商业，跌破警戒线触发干预' },
+      { name: '支持者覆盖数', pass: '三点成网', good: '多线', note: '单点 = 高危' },
+      { name: 'NPS', pass: '慎用', good: '用「续约意向提前问询」替代', note: '企业场景样本小、政治化' },
+    ],
+  },
+  {
+    layer: '商业层',
+    desc: '生意值不值',
+    items: [
+      { name: 'NRR 净收入留存', pass: '100%', good: '120%', note: 'Palantir 139%。>120% 增长引擎内生' },
+      { name: '交付毛利率', pass: '20–40%', good: '60%+', note: '涨得快比绝对值高更能说明模式成不成——不上升 = 咨询公司' },
+      { name: '定制递减率', pass: '—', good: '第 N 个 << 第 1 个', note: '连续三个不降立即检视产品回流机制' },
+      { name: '销售周期', pass: '—', good: '数周', note: 'Palantir 用训练营从 9–12 月压到数周' },
+      { name: 'CAC 回收期', pass: '—', good: '随案例缩短', note: '前期普遍难看，看趋势' },
+      { name: 'LTV/CAC', pass: '3+', good: '—', note: 'FDE 早期可能 <2，必须配 NRR 一起读' },
+    ],
+  },
+  {
+    layer: '组织层',
+    desc: '团队能不能走远',
+    items: [
+      { name: '现场→产品回流速率', pass: '—', good: '持续产出', note: '测的是 FDE 模式「灵魂器官」是否在跳动' },
+      { name: '交付资产复用率', pass: '—', good: '逐季上升', note: '三级复制杠杆的综合读数' },
+      { name: 'FDE 人均产能', pass: '—', good: '平台化后抬升', note: '纯人力模式天花板明显' },
+      { name: '团队续航', pass: '—', good: '差旅 <50%', note: '团队烧干了，前面所有指标都是烟花' },
+    ],
+  },
+];
+---
+
+<BaseLayout title="指标速查" activeSlug="metrics">
+  <article class="metrics-page">
+    <header class="page-head">
+      <p class="eyebrow">一页纸速查</p>
+      <h1>FDE 指标速查</h1>
+      <p class="lead">
+        全书全链路指标体系。指标贵精不贵多——每个项目盯住 3–5 个核心指标组合
+       （通常 1 个价值 + 1 个使用 + 1 个关系），胜过铺满一面墙的仪表盘。
+      </p>
+    </header>
+
+    <div class="metric-layers">
+      {
+        metrics.map((layer) => (
+          <section class="metric-layer">
+            <header class="layer-head">
+              <h2>{layer.layer}</h2>
+              <span class="layer-desc">{layer.desc}</span>
+            </header>
+            <div class="metric-table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>指标</th>
+                    <th>及格</th>
+                    <th>优秀 / 标杆</th>
+                    <th>说明</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {layer.items.map((it) => (
+                    <tr>
+                      <td class="metric-name">{it.name}</td>
+                      <td>{it.pass}</td>
+                      <td class="metric-good">{it.good}</td>
+                      <td class="metric-note">{it.note}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        ))
+      }
+    </div>
+
+    <aside class="usage-tips">
+      <h2>使用建议</h2>
+      <ol>
+        <li>每个客户项目锁定 3–5 个「核心指标组合」：通常一个价值指标 + 一个使用指标 + 一个关系指标。</li>
+        <li>基线数据在项目启动第一天采集——错过永不再来。</li>
+        <li>指标与客户共建、双方共认，否则它在续约谈判桌上没有效力。</li>
+        <li>每半年检修一次指标体系本身：删除无人看的，补上反复被问的。</li>
+      </ol>
+    </aside>
+  </article>
+</BaseLayout>
+
+<style>
+  .metrics-page { max-width: 56rem; }
+  .page-head { margin-bottom: 2rem; }
+  .eyebrow {
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--c-accent); font-weight: 700; margin: 0 0 0.5rem;
+  }
+  .page-head h1 {
+    font-size: clamp(1.75rem, 1.2rem + 2vw, 2.5rem);
+    font-weight: 800; margin: 0 0 0.75rem; letter-spacing: -0.01em;
+  }
+  .page-head .lead {
+    font-size: 0.95rem; color: var(--text-soft);
+    line-height: 1.7; margin: 0; max-width: 44rem;
+  }
+  .metric-layers { display: flex; flex-direction: column; gap: 2.5rem; }
+  .layer-head {
+    display: flex; align-items: baseline; gap: 0.75rem;
+    margin-bottom: 0.75rem; flex-wrap: wrap;
+  }
+  .layer-head h2 {
+    font-size: 1.25rem; font-weight: 800; margin: 0;
+    color: var(--c-accent);
+  }
+  .layer-desc { font-size: 0.85rem; color: var(--text-soft); }
+  .metric-table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  table {
+    width: 100%; border-collapse: collapse; font-size: 0.875rem;
+    min-width: 36rem;
+  }
+  th, td {
+    padding: 0.6rem 0.85rem; text-align: left;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  th {
+    background: var(--bg-sidebar); font-weight: 700;
+    font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em;
+    color: var(--text-soft);
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--bg-sidebar); }
+  .metric-name { font-weight: 600; white-space: nowrap; }
+  .metric-good { color: var(--c-accent); font-weight: 600; }
+  .metric-note { color: var(--text-soft); font-size: 0.82rem; }
+  .usage-tips {
+    margin-top: 3rem; padding: 1.5rem 1.75rem;
+    background: var(--bg-sidebar); border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .usage-tips h2 {
+    font-size: 1.1rem; font-weight: 700; margin: 0 0 0.75rem;
+    color: var(--c-accent);
+  }
+  .usage-tips ol { margin: 0; padding-left: 1.5rem; }
+  .usage-tips li { margin: 0.4rem 0; font-size: 0.875rem; line-height: 1.65; }
+</style>
