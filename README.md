@@ -2,11 +2,11 @@
 
 > 基于 [《前线部署工程师：人工智能时代的客户价值交付秘籍》](https://github.com/xdash/FDE-the-Guidance-Book-of-Forward-Deployed-Engineer)（范冰 著，开源公开）整理。
 
-本仓库提供一个静态阅读网站，做三件事：
+本仓库是一个静态阅读站，做三件事：
 
-1. **中英逐段对照阅读** —— 原文与英文翻译按段落并排呈现（桌面端左右、移动端上下），便于精读与术语对照。
-2. **可执行工作手册** —— 把全书方法论提炼为按交付旅程组织的检查清单，每项带阈值与高危信号，可直接落地。
-3. **指标速查** —— FDE 全链路指标体系一页纸，附参考标准与警戒线。
+1. **中英逐段对照阅读** —— 原文和英文翻译按段落并排（桌面端左右、移动端上下），精读、查术语都方便。
+2. **可执行工作手册** —— 全书方法论整理成按交付旅程排的检查清单，每项带阈值与高危信号。
+3. **指标速查** —— FDE 全流程指标一页纸，附参考线与警戒线。
 
 ## 本地开发
 
@@ -21,13 +21,13 @@ pnpm preview  # 预览构建产物
 
 ## 部署（GitHub Pages）
 
-站点配置为部署到 `https://aznikline.github.io/fde-book/`（项目页，非根路径）。
+站点部署到 `https://aznikline.github.io/fde-book/`（项目页，非根路径）。
 `.github/workflows/deploy.yml` 会在 push 到 `master` 时自动构建并部署。
 
-**首次启用需在 GitHub 仓库：**
+**首次启用要在 GitHub 仓库：**
 Settings → Pages → Build and deployment → Source 选 **GitHub Actions**。
 
-`base: '/fde-book/'` 已配在 `astro.config.mjs`，站内链接通过 `import.meta.env.BASE_URL` 自动加前缀，子路径部署下不会 404。
+`base: '/fde-book/'` 已配在 `astro.config.mjs`，站内链接用 `import.meta.env.BASE_URL` 自动加前缀，子路径部署下不会 404。
 
 ## 项目结构
 
@@ -35,7 +35,7 @@ Settings → Pages → Build and deployment → Source 选 **GitHub Actions**。
 src/
 ├── content/
 │   ├── chaptersZh/      # 中文原文（12 章）
-│   ├── chaptersEn/      # 英文译文（与中文逐段对齐，逐章推进）
+│   ├── chaptersEn/      # 英文译文（与中文逐段对齐，全书完成）
 │   └── handbook/         # 工作手册
 ├── components/
 │   ├── ParallelText.astro    # 中英段落并排渲染核心组件
