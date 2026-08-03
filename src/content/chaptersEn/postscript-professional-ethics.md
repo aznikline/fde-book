@@ -27,6 +27,6 @@ FDE is a young profession, and no one has yet written its code of conduct. May t
 
 ## Acknowledgements
 
-Thanks to Bob McGrew, Barry, Ted Mabrey, Nabeel Qureshi, and other former Palantir employees for their public recollections and writing—you turned the methodology of a "mysterious company" into public knowledge; thanks to the hosts of the YC Lightcone, Latent Space, and other podcasts—your follow-up questions allowed a great deal of firsthand experience to be preserved; thanks to a16z, the MIT NANDA lab, The New Stack, and CIO.com for their research and reporting; thanks to China's FDE pioneers for the reflections written on their official sites—this conversation in the Chinese-speaking world did not have to start from zero because of you.
+Thanks to Bob McGrew, Barry, Ted Mabrey, Nabeel Qureshi, and other former Palantir employees for their public recollections and writing—you turned the methodology of a "mysterious company" into public knowledge; thanks to the hosts of podcasts such as YC Lightcone and Latent Space—your follow-up questions allowed a great deal of firsthand experience to be preserved; thanks to a16z, the MIT NANDA lab, The New Stack, and CIO.com for their research and reporting; thanks to China's FDE pioneers for the reflections written on their official sites—this conversation in the Chinese-speaking world did not have to start from zero because of you.
 
 Thanks to everyone willing to read this far. May the roads you build have people walking them; may the roads still be there after you walk on.
