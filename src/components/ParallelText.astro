@@ -14,17 +14,14 @@ const pairs = pairBlocks(zhBlocks, enBlocks);
 ---
 
 <div class="parallel">
+  <div class="parallel-legend" aria-hidden="true">
+    <span>中文</span><span class="legend-dot">／</span><span>English</span>
+  </div>
   {
     pairs.map((p, i) => (
       <div class={`pair${p.aligned ? '' : ' pair--unaligned'}`} data-index={i}>
-        <div class="pair__col">
-          <span class="pair__lang">中文</span>
-          <div class="pair__zh" set:html={p.zh ?? '<p class="missing">（中文缺）</p>'} />
-        </div>
-        <div class="pair__col">
-          <span class="pair__lang pair__lang--en">English</span>
-          <div class="pair__en" set:html={p.en ?? '<p class="missing">（English missing）</p>'} />
-        </div>
+        <div class="pair__zh" set:html={p.zh ?? '<p class="missing">（中文缺）</p>'} />
+        <div class="pair__en" set:html={p.en ?? '<p class="missing">（English missing）</p>'} />
       </div>
     ))
   }
@@ -35,6 +32,21 @@ const pairs = pairBlocks(zhBlocks, enBlocks);
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+  }
+  /* 极简图例：只在对照区顶部出现一次，低调不强调 */
+  .parallel-legend {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.72rem;
+    color: var(--text-soft);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    margin-bottom: -0.5rem;
+  }
+  .parallel-legend .legend-dot {
+    opacity: 0.5;
   }
   .pair {
     display: grid;
@@ -54,25 +66,6 @@ const pairs = pairBlocks(zhBlocks, enBlocks);
     padding: 0.75rem 1rem;
     border-radius: var(--radius);
     background: color-mix(in srgb, var(--c-warn) 7%, transparent);
-  }
-  .pair__lang {
-    display: inline-flex;
-    align-items: center;
-    font-size: 0.66rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--text-soft);
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    padding: 0.12em 0.7em;
-    margin-bottom: 0.6rem;
-    background: var(--bg-sidebar);
-  }
-  .pair__lang--en {
-    color: var(--c-accent);
-    border-color: color-mix(in srgb, var(--c-accent) 30%, transparent);
-    background: var(--c-accent-soft);
   }
   .pair__zh,
   .pair__en {
